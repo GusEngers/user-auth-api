@@ -5,12 +5,15 @@ const { Router } = require('express');
 const router = Router();
 const moment = require('moment');
 const validationReg = require('../controllers/validationReg.js')
+const verificationApiKey = require('../controllers/api_key/verificationApiKey.js');
 
 
 router.get('/', async (req, res) => {
 	try {
-		const data = await User.find({});
-		res.json({data: data});
+		if(await verificationApiKey(req.query.api_key)) {
+			const data = await User.find({api_key: req.query.api_key});
+			res.json({data: data});
+		}
 	} catch (error) {
 		res.status(400).json({error: error.message});
 	};
