@@ -3,7 +3,6 @@ const Api_Key = require('../models/api_key.js');
 const mongoose = require('mongoose'); 
 const { Router } = require('express');
 const router = Router();
-const moment = require('moment');
 const validationReg = require('../controllers/validationReg.js')
 const verificationApiKey = require('../controllers/api_key/verificationApiKey.js');
 
@@ -12,26 +11,20 @@ router.get('/', async (req, res) => {
 	try {
 		if(await verificationApiKey(req.query.api_key)) {
 			const data = await User.find({api_key: req.query.api_key});
-			res.json({data: data});
-		}
-	} catch (error) {
-		res.status(400).json({error: error.message});
-	};
-});
-
-router.post('/', async (req, res) => {
-	try {
-		const data = await validationReg(req.query.api_key, req.body.name, req.body.email, req.body.password);
-		if(data) {
-			let now = moment().format('D-M-YYYY, h:mm:ss');
-			const fi = await Api_Key.findById(req.query.api_key);
-			const data = {
-				...req.body,
-				api_key: fi._id,
-				date: now
-			}
-			await User.create(data);
-			res.status(201).json({data: `${req.body.name} sucesfully created!`});
+			
+			res.json({
+				count: data.length,
+				data: data.map( user => {
+					return {
+						_id: user._id,
+						name: user.name,
+						email: user.email,
+						status: user.status,
+						date: user.date,
+						data: user.data
+					}
+				})
+			});
 		}
 	} catch (error) {
 		res.status(400).json({error: error.message});

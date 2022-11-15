@@ -21,7 +21,7 @@ const dataSchema = new mongoose.Schema({
 		type: String,
 		lowercase: true,
 		enum: ['active', 'inactive'],
-		required: true
+		default: 'active'
 	},
 	date: {
 		type: String
