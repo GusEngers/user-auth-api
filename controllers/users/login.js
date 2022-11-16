@@ -10,13 +10,13 @@ const verify = Joi.object({
 	password: Joi.string().min(8).required()
 });
 
-const validationLog = async (email, password) => {
+const validationLog = async (api_key, email, password) => {
 	// -- data syntax --
 	const { error } = verify.validate({ email, password });
 	if(error) throw new Error(error.details[0].message);
 
 	// -- email verification --
-	const dataEV = await User.findOne({email});
+	const dataEV = await User.findOne({email, api_key});
 	if(!dataEV) throw new Error('The email does not exist!');
 
 	// -- password verification --
@@ -29,13 +29,13 @@ const validationLog = async (email, password) => {
 	};
 };
 
-const login = async (email, password) => {
-	const verification = await validationLog(email, password);
+const login = async (api_key, email, password) => {
+	const verification = await validationLog(api_key, email, password);
 
 	if(verification.status){
 		const token = jwt.sign({
-			name: verification.name,
-			id: verification._id
+			name: verification.data.name,
+			id: verification.data._id
 		}, process.env.TOKEN);
 
 		return token;
