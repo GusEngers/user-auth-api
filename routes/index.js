@@ -3,7 +3,6 @@ const Api_Key = require('../models/api_key.js');
 const mongoose = require('mongoose'); 
 const { Router } = require('express');
 const router = Router();
-const validationReg = require('../controllers/validationReg.js')
 const verificationApiKey = require('../controllers/api_key/verificationApiKey.js');
 
 
