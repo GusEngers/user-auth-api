@@ -11,9 +11,16 @@ const users = require('./routes/users.js');
 const deleteUser = require('./routes/delete.js');
 const recovery = require('./routes/recovery.js');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 
+let corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('dev'));
 
