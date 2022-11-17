@@ -26,7 +26,6 @@ router.get('/:id', async (req, res) => {
 	try {
 		if(await verificationApiKey(api_key)) {
 			let data = await userData(api_key, id);
-			await console.log(data)
 			res.json({data});
 		};
 	} catch (error) {
