@@ -3,7 +3,7 @@ const User = require('../../models/user.js');
 
 const dataUser = (user) => {
 	return {
-		_id: user._id,
+		id: user._id,
 		name: user.name,
 		email: user.email,
 		status: user.status,
@@ -29,4 +29,7 @@ const usersList = async (api_key, status) => {
 	};
 };
 
-module.exports = usersList;
+module.exports = {
+	usersList,
+	dataUser
+};

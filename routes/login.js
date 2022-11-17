@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const router = Router();
 const { login } = require('../controllers/users/login.js');
-const verificationApiKey = require('../controllers/api_key/verificationApiKey.js');
+const { verificationApiKey } = require('../controllers/api_key/verificationApiKey.js');
 
 router.post('/', async (req, res) => {
 	const { api_key } = req.query;

@@ -1,7 +1,7 @@
 'use strict';
 const { Router } = require('express');
 const router = Router();
-const verificationApiKey = require('../controllers/api_key/verificationApiKey.js');
+const { verificationApiKey } = require('../controllers/api_key/verificationApiKey.js');
 const { logicalDelete, definitiveDelete } = require('../controllers/users/delete.js');
 
 router.put('/', async (req, res) => {

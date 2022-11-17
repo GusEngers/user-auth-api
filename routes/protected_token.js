@@ -1,7 +1,7 @@
 'use strict';
 const { Router } = require('express');
 const router = Router();
-const verificationApiKey = require('../controllers/api_key/verificationApiKey.js');
+const { verificationApiKey } = require('../controllers/api_key/verificationApiKey.js');
 const verifyUser = require('../controllers/api_key/verifyUser.js');
 
 router.get('/', async (req, res) => {
