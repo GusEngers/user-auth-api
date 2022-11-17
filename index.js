@@ -2,7 +2,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const routes = require('./routes/index.js');
 const generate = require('./routes/generate.js');
 const register = require('./routes/register.js');
 const login = require('./routes/login.js');
@@ -28,7 +27,6 @@ database.once('connected', () => {
 });
 
 // --	Routes --
-app.use('/', routes);
 app.use('/generate', generate);
 app.use('/register', register);
 app.use('/login', login);
