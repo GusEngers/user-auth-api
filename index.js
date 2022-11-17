@@ -8,6 +8,7 @@ const register = require('./routes/register.js');
 const login = require('./routes/login.js');
 const protected_token = require('./routes/protected_token.js');
 const verifyToken = require('./controllers/users/verifyToken.js');
+const users = require('./routes/users.js');
 require('dotenv').config();
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/generate', generate);
 app.use('/register', register);
 app.use('/login', login);
 app.use('/protected', verifyToken, protected_token);
+app.use('/users', users);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Server start on port: ${process.env.PORT}`);
