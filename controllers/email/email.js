@@ -14,16 +14,30 @@ const newApiKeyEmail = async (email, api_key) => {
     from: process.env.EMAIL,
     to: email,
     subject: 'UAAPI',
-    text: `Bienvenido su api key es: ${api_key}`,
-    html: `<p>welcome your api key is: ${api_key}</p>`
+    text: '',
+    html: `<p>Bienvenido su api key es: ${api_key}</p>`
   }
 
-  await transporter.sendMail(newEmail, (err, result) => {
-    if(err) return console.log(err)
-    console.log('Mensagem enviada!!!!' + result)
+  await transporter.sendMail(newEmail, (error, result) => {
+    if(error) throw new Error(error);
   });
-}
+};
+
+const resendApiKeyEmail = async (email, api_key) => {
+  const newEmail = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: 'UAAPI',
+    text: '',
+    html: `<p>Bienvenido otra vez!! Su api key es: ${api_key}</p>`
+  }
+
+  await transporter.sendMail(newEmail, (error, result) => {
+    if(error) throw new Error(error);
+  }); 
+};
 
 module.exports = {
-  newApiKeyEmail
-}
+  newApiKeyEmail,
+  resendApiKeyEmail
+};
