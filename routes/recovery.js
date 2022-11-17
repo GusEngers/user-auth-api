@@ -1,19 +1,18 @@
 'use strict';
 const { Router } = require('express');
 const router = Router();
-const { register } = require('../controllers/users/register.js');
 const { verificationApiKey } = require('../controllers/api_key/verificationApiKey.js');
+const { recoveryUser } = require('../controllers/users/recovery.js');
 
-router.post('/', async (req, res) => {
-	const { api_key } = req.query;
-	const { name, email, password, data } = req.body;
+router.put('/user', async (req, res) => {
+	const { api_key, id } = req.query;
 	try {
 		if(await verificationApiKey(api_key)) {
-			const info = await register(api_key, name, email, password, data);
-			res.status(201).json({
-				data: info
-			})
-		}
+			let data = await recoveryUser(api_key, id);
+			res.json({
+				data
+			});
+		};
 	} catch (error) {
 		res.status(400).json({error: error.message});
 	};

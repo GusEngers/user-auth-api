@@ -22,4 +22,7 @@ const verificationApiKey = async (api_key) => {
 	return true;
 };
 
-module.exports = verificationApiKey;
+module.exports = {
+	verificationApiKey,
+	verificationObjectId
+};
