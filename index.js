@@ -36,6 +36,14 @@ database.once('connected', () => {
 });
 
 // --	Routes --
+// -- default --
+app.get('*', (req, res) => {
+	res.json({
+		info: 'Has ingresado a una ruta inexistente, para más información sobre los endpoints visita el repositorio del proyecto en GitHub',
+		url: 'https://github.com/GusEngers/user-auth-api'
+	});
+});
+// -- enpoints --
 app.use('/generate', generate);
 app.use('/register', register);
 app.use('/login', login);
