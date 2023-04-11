@@ -2,7 +2,9 @@
 const express = require('express');
 const { connect } = require('mongoose');
 const morgan = require('morgan');
-const generate = require('./routes/generate.js');
+require('dotenv').config();
+const cors = require('cors');
+
 const register = require('./routes/register.js');
 const login = require('./routes/login.js');
 const protected_token = require('./routes/protected_token.js');
@@ -10,8 +12,6 @@ const verifyToken = require('./controllers/users/verifyToken.js');
 const users = require('./routes/users.js');
 const deleteUser = require('./routes/delete.js');
 const recovery = require('./routes/recovery.js');
-require('dotenv').config();
-const cors = require('cors');
 
 const app = express();
 
