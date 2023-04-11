@@ -30,7 +30,7 @@ const validationLog = async (email, password) => {
 };
 
 const login = async (email, password) => {
-  const verification = await validationLog(api_key, email, password);
+  const verification = await validationLog(email, password);
 
   if (verification.status) {
     const token = jwt.sign(
