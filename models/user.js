@@ -13,10 +13,6 @@ const dataSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	api_key: {
-		type: String,
-		required: true
-	},
 	status: {
 		type: String,
 		lowercase: true,

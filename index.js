@@ -34,7 +34,6 @@ connect(process.env.URL_DB)
   });
 
 // -- enpoints --
-app.use('/generate', generate);
 app.use('/register', register);
 app.use('/login', login);
 app.use('/protected', verifyToken, protected_token);
