@@ -1,6 +1,6 @@
 'use strict';
 const User = require('../../models/user.js');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
