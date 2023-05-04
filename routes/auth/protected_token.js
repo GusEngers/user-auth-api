@@ -1,6 +1,6 @@
 'use strict';
 const { Router } = require('express');
-const verifyUser = require('../controllers/users/verifyUser');
+const verifyUser = require('../../controllers/users/verifyUser');
 const router = Router();
 
 router.get('/', async (req, res) => {

@@ -1,7 +1,7 @@
 const { Router } = require('express');
-const generateApiKey = require('../../controllers/api_key/generate_api_key');
-const getProjects = require('../../controllers/api_key/get_projects');
-const getKey = require('../../controllers/api_key/get_key');
+const generateApiKey = require('../controllers/api_key/generate_api_key');
+const getProjects = require('../controllers/api_key/get_projects');
+const getKey = require('../controllers/api_key/get_key');
 
 const router = Router();
 

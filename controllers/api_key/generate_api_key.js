@@ -24,7 +24,7 @@ async function generateApiKey(email, project) {
   if (!(await verificationProject(project, email)))
     throw new Error('Error: Existing Project!');
 
-  let key = new Types.ObjectId();
+  let key = `UAA-${new Types.ObjectId()}-KEY`;
   let newAK = new ApiKey({ key, email, project });
   await newAK.save();
   return newAK.key;

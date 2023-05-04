@@ -3,12 +3,12 @@ const ApiKey = require('../models/api_key');
 /**
  * Verifica si la Api-Key ingresada es válida (existe en la base de datos)
  * @param { string } key Api-Key ha verificar
- * @returns { Promise<boolean> } true si existe
+ * @returns { Promise<void> }
  */
 async function isValid(key) {
   let response = await ApiKey.findOne({ key });
   if (!response) throw new Error("Error: Api Key doesn't exist!");
-  return true;
+  return;
 }
 
 /**

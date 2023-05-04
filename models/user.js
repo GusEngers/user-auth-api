@@ -1,6 +1,10 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const dataSchema = new Schema({
+  id: {
+    type: String || Schema.Types.ObjectId,
+    default: new Types.ObjectId(),
+  },
   name: {
     type: String,
     required: true,
@@ -18,6 +22,10 @@ const dataSchema = new Schema({
     lowercase: true,
     enum: ['active', 'inactive'],
     default: 'active',
+  },
+  api_key: {
+    type: String,
+    required: true,
   },
   date: {
     type: Date,
