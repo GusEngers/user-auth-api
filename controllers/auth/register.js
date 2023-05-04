@@ -37,7 +37,7 @@ async function hashPassword(pass) {
 
 /**
  * Añade un nuevo usuario a la base de datos luego de pasar el proceso de verificación
- * @param { objet } user Objeto con los datos necesarios del nuevo ususario
+ * @param { object } user Objeto con los datos necesarios del nuevo ususario
  * @returns { Promise<string> } Mensaje de éxito al crear el nuevo usuario
  */
 async function register(user) {

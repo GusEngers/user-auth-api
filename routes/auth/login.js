@@ -1,7 +1,7 @@
 'use strict';
 const { Router } = require('express');
 const router = Router();
-const { login } = require('../../controllers/users/login.js');
+const { login } = require('../../controllers/auth/login.js');
 
 router.post('/', async (req, res) => {
   const { email, password } = req.body;

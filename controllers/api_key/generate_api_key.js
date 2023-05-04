@@ -1,5 +1,10 @@
 const ApiKey = require('../../models/api_key');
 let { Types } = require('mongoose');
+const Joi = require('joi');
+
+const verify = Joi.object({
+  email: Joi.string().required().email(),
+});
 
 /**
  * Verifica si el proyecto vinculado al correo ya existe
@@ -8,6 +13,9 @@ let { Types } = require('mongoose');
  * @returns { Promise<boolean> } true si el proyecto no existe - false si el proyecto no existe
  */
 async function verificationProject(project, email) {
+  const { error } = verify.validate({ email });
+  if (error) throw new Error(`Error: ${error.details[0].message}!`);
+  
   let response = await ApiKey.findOne({ project, email });
   if (!response) return true;
   return false;
