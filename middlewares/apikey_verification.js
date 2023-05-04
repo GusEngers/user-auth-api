@@ -2,7 +2,7 @@ const ApiKey = require('../models/api_key');
 
 /**
  * Verifica si la Api-Key ingresada es válida (existe en la base de datos)
- * @param { string } key Api-Key a verificar
+ * @param { string } key Api-Key ha verificar
  * @returns { Promise<boolean> } true si existe
  */
 async function isValid(key) {
@@ -12,7 +12,7 @@ async function isValid(key) {
 }
 
 /**
- * Middleware que verifica si se a ingresado la Api-Key además de verificar si es válida
+ * Middleware que verifica si se ha ingresado la Api-Key además de verificar si es válida
  * @param { Request } req Petición
  * @param { Response } res Respuesta
  * @param { NextFunction } next Función Next

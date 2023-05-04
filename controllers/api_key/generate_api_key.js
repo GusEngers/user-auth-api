@@ -14,10 +14,10 @@ async function verificationProject(project, email) {
 }
 
 /**
- * Genera una nueva Api Key y la guarda en la base de datos
+ * Genera una nueva Api-Key y la guarda en la base de datos
  * @param { string } email Email del owner
  * @param { string } project Nombre del proyecto
- * @returns { Promise<string> }
+ * @returns { Promise<string> } Api-Key generada
  */
 async function generateApiKey(email, project) {
   if (!email || !project) throw new Error('Error: Missing Parameters!');
