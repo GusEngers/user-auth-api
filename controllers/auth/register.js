@@ -19,7 +19,7 @@ async function validationRegister(data, api_key) {
   if (error) throw new Error(`Error: ${error.details[0].message}!`);
 
   const email = await User.findOne({ email: data.email, api_key });
-  if (email.status === 'inactive')
+  if (!!email && email.status === 'inactive')
     throw new Error('Error: Acount already exists but is inactive!');
   if (!!email) throw new Error('Error: Email already exists!');
 }
