@@ -13,15 +13,13 @@ const verify = Joi.object({
  * Verifica si los datos ingresados para el registro son válidos
  * @param { object } data Objeto con el nombre, email y contraseña
  * @param { string } api_key Api-Key
- * @returns { Promise<void> }
  */
 async function validationRegister(data, api_key) {
   const { error } = verify.validate(data);
   if (error) throw new Error(`Error: ${error.details[0].message}!`);
 
   const email = await User.findOne({ email: data.email, api_key });
-  if (!email) return;
-  throw new Error('Error: Email already exists!');
+  if (!!email) throw new Error('Error: Email already exists!');
 }
 
 /**

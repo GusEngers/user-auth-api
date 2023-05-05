@@ -40,7 +40,6 @@ async function validationLogin(email, password, api_key) {
  */
 async function login(email, password, api_key) {
   const { name, id } = await validationLogin(email, password, api_key);
-
   return jwt.sign({ name, id }, TOKEN, { expiresIn: '31 days' });
 }
 

@@ -1,7 +1,8 @@
 const { Router } = require('express');
-const verifyToken = require('../controllers/users/verifyToken');
+const tokenVerification = require('../middlewares/token_verification');
 const register = require('../controllers/auth/register');
 const login = require('../controllers/auth/login');
+const userVerification = require('../controllers/auth/user_verification');
 
 const router = Router();
 
@@ -25,6 +26,14 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.get('/protected', verifyToken, async (req, res) => {});
+router.get('/protected', tokenVerification, async (req, res) => {
+  const { api_key } = req.query;
+  try {
+    await userVerification(req.user.id, api_key);
+    res.json({ valid: true });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 
 module.exports = router;
