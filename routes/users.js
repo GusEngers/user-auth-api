@@ -61,4 +61,5 @@ router.put('/recovery/:id', async (req, res) => {
     res.status(500).send(error.message);
   }
 });
+
 module.exports = router;

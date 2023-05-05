@@ -29,7 +29,7 @@ async function getList(status, api_key) {
  * @returns { User } Usuario solicitado
  */
 async function getUser(id, api_key) {
-  if (!id) throw new Error('Error: Invlaid parameter!');
+  if (!id) throw new Error('Error: Invalid parameter!');
   const user = await User.findOne({ id, api_key }).select(
     '-_id -api_key -password -__v'
   );
