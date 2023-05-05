@@ -13,7 +13,7 @@ const verify = Joi.object({
 
 /**
  * Verifica si los datos ingresados para iniciar sesión son correctos y válidos
- * @param { string } email Email ha verificar 
+ * @param { string } email Email ha verificar
  * @param { string } password Contraseña ha verificar
  * @param { string } api_key Api-Key
  * @returns { Promise<User> } Si no hay errores devuelve el usuario solicitado
@@ -24,7 +24,8 @@ async function validationLogin(email, password, api_key) {
 
   const user = await User.findOne({ email, api_key });
   if (!user) throw new Error("Error: The email doesn't exist!");
-
+  if (user.status === 'inactive') throw new Error('Error: Acount inactive!');
+  
   const pass = await bcrypt.compare(password, user.password);
   if (!pass) throw new Error('Error: Invalid password!');
 
@@ -33,7 +34,7 @@ async function validationLogin(email, password, api_key) {
 
 /**
  * Genera un token de sesión luego de validar los datos ingresados
- * @param { string } email Email del ususario 
+ * @param { string } email Email del ususario
  * @param { string } password Contraseña del ususario
  * @param { string } api_key Api-Key
  * @returns { Promise<string> } Si no hay errores devuelve el token de sesión

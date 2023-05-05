@@ -1,29 +1,29 @@
 'use strict';
 const { Router } = require('express');
 const router = Router();
-const { usersList } = require('../controllers/users/usersList.js');
-const userData = require('../controllers/users/userData.js');
+const { getList, getUser } = require('../controllers/users/get_user.js');
 
-router.get('/', async (req, res) => {
-  const { status } = req.query;
+router.get('/list/:status', async (req, res) => {
+  const { status } = req.params;
   try {
-    let data = await usersList(status);
+    let users = await getList(status, req.query.api_key);
     res.json({
-      count: data.length,
-      data,
+      count: users.length,
+      status,
+      users,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).send(error.message);
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/id/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    let data = await userData(id);
-    res.json({ data });
+    let data = await getUser(id, req.query.api_key);
+    res.json(data);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).send(error.message);
   }
 });
 

@@ -19,6 +19,8 @@ async function validationRegister(data, api_key) {
   if (error) throw new Error(`Error: ${error.details[0].message}!`);
 
   const email = await User.findOne({ email: data.email, api_key });
+  if (email.status === 'inactive')
+    throw new Error('Error: Acount already exists but is inactive!');
   if (!!email) throw new Error('Error: Email already exists!');
 }
 
@@ -40,10 +42,7 @@ async function hashPassword(pass) {
  */
 async function register(user) {
   const { name, email, password, data, api_key } = user;
-  await validationRegister(
-    { name, email, password },
-    api_key
-  );
+  await validationRegister({ name, email, password }, api_key);
 
   const newUser = new User({
     name,

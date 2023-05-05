@@ -10,6 +10,7 @@ const { PORT, MONGO_URI } = process.env;
 // Routes import
 const api_key = require('./routes/api_key');
 const auth = require('./routes/auth');
+const users = require('./routes/users');
 
 const app = express();
 const corsOptions = {
@@ -25,6 +26,7 @@ app.use(morgan('dev'));
 // Routes
 app.use('/api_key', api_key);
 app.use('/auth', apikeyVerification, auth);
+app.use('/users', apikeyVerification, users);
 
 // Connection
 connect(MONGO_URI)
