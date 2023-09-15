@@ -1,31 +1,25 @@
 {
   "name": "user-auth-api",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "production": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GusEngers/user-auth-api.git"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Engers Gustavo",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GusEngers/user-auth-api/issues"
-  },
-  "homepage": "https://github.com/GusEngers/user-auth-api#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.7.2",
+    "mongoose": "^7.5.1"
+  },
+  "devDependencies": {
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^3.0.1"
   }
 }
