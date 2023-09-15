@@ -1,7 +1,11 @@
 const express = require('express');
 const path = require('path');
+const handleCors = require('./utils/handleCors');
+const handleError = require('./utils/handleError');
+const handleNotFound = require('./utils/handleNotFound');
+const client = require('./routes/client');
+const api = require('./routes/api');
 require('dotenv').config();
-// const router = require('./api/routes');
 
 const app = express();
 
@@ -16,9 +20,10 @@ if (process.env.NODE_ENV === 'dev') {
   app.use(require('morgan')('dev'));
 }
 
-// app.use('/', router);
+app.use('/', client);
+app.use('/api', handleCors, api);
 
-// app.use(handleError);
-// app.use(handleNotFound);
+app.use(handleError);
+app.use(handleNotFound);
 
 module.exports = app;
