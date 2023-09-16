@@ -5,8 +5,14 @@ body {
   color: #ffffff;
   display: flex;
   flex-direction: column;
+  font-family: 'Calibri', 'Courier New', Courier, monospace;
   justify-content: flex-start;
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+@font-face {
+  font-family: 'Calibri';
+  src: url('/public/fonts/calibri.tff'), format('truetype');
 }
