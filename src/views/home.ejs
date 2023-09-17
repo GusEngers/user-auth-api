@@ -2,14 +2,30 @@
 <html lang="en">
   <head>
     [%- include('_components/global-head', { title: 'User-Auth - Home'}) %]
+    <link rel="stylesheet" href="/public/css/home.css" />
   </head>
   <body>
     [%- include('_components/nav-bar') %]
     <main>
-      <h1>Home Page</h1>
-      <h1>[%= ejemplo %]</h1>
+      <h1 class="title-home">User-Auth-Api</h1>
+      <h2>Administra tus usuarios fácilmente</h2>
+      <p class="text-home">
+        Con <b class="emphasis">User-Auth-Api</b>, podrás crear, modificar y
+        eliminar usuarios sin demasiadas complicaciones. Nuestra api es segura y
+        confiable. ¡No esperes más y genera tu api-key hoy mismo!
+      </p>
+      <form action="/api-key" method="post" id="form-home" class="form-home">
+        <label for="email">Ingrese su email por favor</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="user@email.com"
+        />
+        <button type="submit" id="submit">Generar Api-Key</button>
+      </form>
     </main>
-    [%- include('_components/footer') %]
-    [%- include('_components/global-script') %]
+    [%- include('_components/footer') %] [%-
+    include('_components/global-script') %]
   </body>
 </html>

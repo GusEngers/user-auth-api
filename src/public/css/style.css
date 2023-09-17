@@ -12,6 +12,18 @@ body {
   width: 100%;
 }
 
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 80vh;
+}
+
+.emphasis {
+  color: #00ffb3;
+}
+
 @font-face {
   font-family: 'Calibri';
   src: url('/public/fonts/calibri.tff'), format('truetype');

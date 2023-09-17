@@ -1,0 +1,18 @@
+.title-home {
+  color: #00ffb3;
+  font-size: 50px;
+  margin: 20px 0 0 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.text-home {
+  width: 50%;
+  text-align: center;
+}
+
+.form-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
