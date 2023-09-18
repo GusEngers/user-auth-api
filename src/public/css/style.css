@@ -24,6 +24,40 @@ main {
   color: #00ffb3;
 }
 
+.info-message {
+  background-color: #ffffffde;
+  border: 1px solid #00a800;
+  border-radius: 5px;
+  color: #00a800;
+  cursor: default;
+  margin: 10px;
+  max-width: 35%;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: wrap;
+}
+
+.error-message {
+  background-color: #ffffffde;
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  color: #ff0000;
+  cursor: default;
+  margin: 10px;
+  max-width: 35%;
+  padding: 10px 20px;
+  text-align: center;
+  text-wrap: wrap;
+}
+
+.error-message-input {
+  color: #ff0000;
+  padding: 0;
+  margin: 3.5px 0;
+  font-size: 10px;
+  display: none;
+}
+
 @font-face {
   font-family: 'Calibri';
   src: url('/public/fonts/calibri.tff'), format('truetype');

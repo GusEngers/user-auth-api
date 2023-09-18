@@ -10,10 +10,19 @@
       <h1 class="title-home">User-Auth-Api</h1>
       <h2>Administra tus usuarios fácilmente</h2>
       <p class="text-home">
-        Con <b class="emphasis">User-Auth-Api</b>, podrás crear, modificar y
-        eliminar usuarios sin demasiadas complicaciones. Nuestra api es segura y
-        confiable. ¡No esperes más y genera tu api-key hoy mismo!
+        Con <b class="emphasis">User-Auth-Api</b> podrás crear, modificar,
+        eliminar y administar tus usuarios sin demasiadas complicaciones.
+        Nuestra api es segura y confiable. ¡No esperes más y genera tu api-key
+        hoy mismo!
       </p>
+
+      [% if(error) { %]
+      <p class="error-message">[%= error %]</p>
+      [% } %]
+      [% if(info) { %]
+      <p class="info-message">[%= info %]</p>
+      [% } %]
+
       <form action="/api-key" method="post" id="form-home" class="form-home">
         <label for="email">Ingrese su email por favor</label>
         <input
@@ -21,11 +30,17 @@
           name="email"
           id="email"
           placeholder="user@email.com"
+          autocomplete="email"
         />
-        <button type="submit" id="submit">Generar Api-Key</button>
+        <p class="error-message-input" id="error-home"></p>
+        <br />
+        <button type="submit" id="submit-home" disabled>Generar Api-Key</button>
       </form>
     </main>
-    [%- include('_components/footer') %] [%-
-    include('_components/global-script') %]
+    [%- include('_components/footer') %]
+
+    <!-- Scripts -->
+    [%- include('_components/global-script') %]
+    <script src="/public/js/home.js"></script>
   </body>
 </html>
