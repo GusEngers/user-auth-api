@@ -5,6 +5,7 @@ const handleError = require('./utils/handleError');
 const handleNotFound = require('./utils/handleNotFound');
 const client = require('./routes/client');
 const api = require('./routes/api');
+const ApiKey = require('./models/api-key');
 require('dotenv').config();
 
 const app = express();
@@ -21,6 +22,10 @@ if (process.env.NODE_ENV === 'dev') {
   app.use(require('morgan')('dev'));
 }
 
+app.get('/borrar', async (req, res) => {
+  await ApiKey.deleteMany({});
+  res.json('Todo eliminado');
+});
 app.use('/', client);
 app.use('/api', handleCors, api);
 

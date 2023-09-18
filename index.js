@@ -4,7 +4,7 @@ require('dotenv').config();
 
 async function main() {
   try {
-    // await db();
+    await db();
     app.listen(process.env.PORT, () => {
       console.log('[INFO] Server listening on port:', process.env.PORT);
     });

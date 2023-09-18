@@ -11,7 +11,7 @@ class HomeForm {
       const reg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       if (!reg.test(value)) {
-        this.error.textContent = 'El correo ingresado no tiene un formato válido';
+        this.error.textContent = 'El e-mail ingresado no tiene un formato válido';
         this.error.style.display = 'block';
         this.btn.disabled = true;
       } else {
