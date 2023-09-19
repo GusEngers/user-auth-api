@@ -6,7 +6,16 @@
   <body>
     [%- include('_components/nav-bar') %]
     <main>
-      <h1>Error Page</h1>
+      <div class="index-docs">
+        <ul>
+          [% for(let link of links) { %]
+            <li><a href="[%= link.id %]">[%= link.name %]</a></li>
+          [% } %]
+        </ul>
+      </div>
+      <div class="container-docs">
+        <h1>Aquí irá la documentación</h1>
+      </div>
     </main>
     [%- include('_components/global-script') %]
   </body>

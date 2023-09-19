@@ -10,10 +10,15 @@ router
   .post(verifyEmail, async (req, res) => {
     try {
       const info = await generateApiKey({ email: req.body.email });
-      res.render('home', { error: null, info });
+      res.render('home', { error: null, info: info.msg });
     } catch (error) {
       res.render('home', { error: error.message, info: null });
     }
   });
+
+router.get('/docs', (req, res) => {
+  const links = [{ name: 'POST - Registrar Usuario', id: '#register' }];
+  res.render('docs', { links });
+});
 
 module.exports = router;

@@ -6,6 +6,8 @@ const handleNotFound = require('./utils/handleNotFound');
 const client = require('./routes/client');
 const api = require('./routes/api');
 const ApiKey = require('./models/api-key');
+const User = require('./models/user');
+
 require('dotenv').config();
 
 const app = express();
@@ -22,8 +24,14 @@ if (process.env.NODE_ENV === 'dev') {
   app.use(require('morgan')('dev'));
 }
 
+app.get("/todos", async (req, res) => {
+  const api_keys = await ApiKey.find({});
+  const users = await User.find({});
+  res.json({api_keys, users});
+})
 app.get('/borrar', async (req, res) => {
   await ApiKey.deleteMany({});
+  await User.deleteMany({});
   res.json('Todo eliminado');
 });
 app.use('/', client);
