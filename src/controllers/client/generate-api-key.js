@@ -1,5 +1,5 @@
 const ApiKey = require('../../models/api-key');
-const registerUser = require('../api/register-user');
+const registerUser = require('../api/auth/register-user');
 
 async function generateApiKey({ email }) {
   try {

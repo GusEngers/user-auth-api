@@ -1,5 +1,5 @@
-const User = require('../../models/user');
-const hashPassword = require('../hash-password');
+const User = require('../../../models/user');
+const hashPassword = require('../../hash-password');
 
 async function registerUser({ email, password, admin, data, api_key }) {
   try {

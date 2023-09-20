@@ -1,9 +1,10 @@
 const { isObjectIdOrHexString } = require('mongoose');
 const ApiKey = require('../models/api-key');
 const handleApiError = require('./handleApiError');
+const { HEADER_API_KEY } = require('./constants');
 
 module.exports = async (req, res, next) => {
-  const header = req.header('Api-Key');
+  const header = req.header(HEADER_API_KEY);
   try {
     if (!header) {
       return handleApiError(res, 401, [

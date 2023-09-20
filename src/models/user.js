@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const { STATUS_ACTIVE, STATUS_INACTIVE } = require('../utils/constants');
 
 const User = model(
   'user',
@@ -18,8 +19,8 @@ const User = model(
     status: {
       type: String,
       lowercase: true,
-      enum: ['active', 'inactive'],
-      default: 'active',
+      enum: [STATUS_ACTIVE, STATUS_INACTIVE],
+      default: STATUS_ACTIVE,
     },
     api_key: {
       type: Schema.Types.ObjectId,
