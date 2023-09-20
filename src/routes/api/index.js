@@ -1,8 +1,7 @@
 const router = require('express').Router();
+const auth = require('./auth');
 
-router.get('/api', (req, res) => {
-  res.json('hola');
-});
+router.use('/auth', auth);
 
 router.get('/*', (req, res) => {
   res.json('ruta inexistente');

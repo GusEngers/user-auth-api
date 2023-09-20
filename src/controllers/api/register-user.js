@@ -9,7 +9,7 @@ async function registerUser({ email, password, admin, data, api_key }) {
       await user.save();
       return user;
     }
-    const user = new User({ email, admin, password: pass, data, api_key });
+    const user = new User({ email, password: pass, data, api_key });
     await user.save();
     return user;
   } catch (error) {
