@@ -21,6 +21,12 @@ module.exports = {
         headers: [this.HEADER_API_KEY],
         methods: [this.METHODS[1]],
       },
+      {
+        path: '/api/user/:id',
+        headers: [this.HEADER_API_KEY],
+        params: ['id'],
+        methods: [this.METHODS[0]],
+      },
     ];
   },
 };
