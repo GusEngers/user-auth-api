@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { LINKS_API } = require('../../utils/constants');
-const auth = require('./auth');
 const user = require('./user');
+const auth = require('./auth');
 
+router.use('/', user);
 router.use('/auth', auth);
-router.use('/user', user);
 
 router.get('/*', (req, res) => {
   res.status(404).json({
