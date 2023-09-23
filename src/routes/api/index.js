@@ -3,7 +3,7 @@ const { LINKS_API } = require('../../utils/constants');
 const user = require('./user');
 const auth = require('./auth');
 
-router.use('/', user);
+router.use('/user', user);
 router.use('/auth', auth);
 
 router.get('/*', (req, res) => {

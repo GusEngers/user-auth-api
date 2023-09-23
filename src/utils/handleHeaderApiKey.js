@@ -20,10 +20,11 @@ module.exports = async (req, res, next) => {
 
     const api = await ApiKey.findById(header);
     if (!api) {
-      throw new Error('La Api-Key proporcionada no existe');
+      throw { message: 'La Api-Key proporcionada no existe', status: 404 };
     }
     next();
   } catch (error) {
-    return handleApiError(res, 404, [error.message]);
+    const status = error.status ?? 400;
+    return handleApiError(res, status, [error.message]);
   }
 };

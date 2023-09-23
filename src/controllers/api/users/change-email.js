@@ -1,23 +1,21 @@
 const User = require('../../../models/user');
 const { STATUS_INACTIVE } = require('../../../utils/constants');
 
-async function changeData({ _id, api_key, data }) {
+async function changeEmail({ _id, api_key, email }) {
   try {
-    const user = await User.findOne({ _id, api_key }).select(
-      '-password -register_date -admin'
-    );
+    const user = await User.findOne({ _id, api_key });
     if (!user) {
       throw { message: 'Usuario no encontrado', status: 404 };
     }
     if (user.status === STATUS_INACTIVE) {
       throw { message: 'El usuario se encuentra inactivo', status: 400 };
     }
-    user.data = data;
+    user.email = email;
     await user.save();
-    return { msg: 'Se actualizó la información del usuario', user };
+    return { msg: 'Se actualizó el e-mail del usuario', user };
   } catch (error) {
     throw error;
   }
 }
 
-module.exports = changeData;
+module.exports = changeEmail;

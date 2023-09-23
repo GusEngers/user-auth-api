@@ -21,9 +21,13 @@ async function verifyUser(req, res, next) {
       await user.save();
       return res.status(201).json({ msg: 'Usuario creado nuevamente', user });
     }
-    throw new Error(`El usuario con el e-mail '${user.email}' ya existe`);
+    throw {
+      message: `El usuario con el e-mail '${user.email}' ya existe`,
+      status: 400,
+    };
   } catch (error) {
-    return handleApiError(res, 400, [error.message]);
+    const status = error.status ?? 400;
+    return handleApiError(res, status, [error.message]);
   }
 }
 

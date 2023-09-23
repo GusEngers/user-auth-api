@@ -3,7 +3,7 @@ const { HEADER_API_KEY } = require('../../utils/constants');
 
 // Middlewares
 const verifyAuthToken = require('../../middlewares/api/verify-auth-token');
-const verifyBody = require('../../middlewares/api/verify-body');
+const { verifyBody } = require('../../middlewares/api/verify-body');
 const verifyUser = require('../../middlewares/api/verify-user');
 const handleApiError = require('../../utils/handleApiError');
 
