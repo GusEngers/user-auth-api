@@ -1,3 +1,4 @@
+const hashPassword = require('../../controllers/hash-password');
 const User = require('../../models/user');
 const {
   STATUS_INACTIVE,
@@ -15,6 +16,8 @@ async function verifyUser(req, res, next) {
     if (!user) return next();
     if (user.status === STATUS_INACTIVE) {
       user.status = STATUS_ACTIVE;
+      const password = await hashPassword(req.body.password);
+      user.password = password;
       await user.save();
       return res.status(201).json({ msg: 'Usuario creado nuevamente', user });
     }
