@@ -25,11 +25,34 @@ module.exports = {
         path: '/api/user/:id',
         headers: {
           GET: [this.HEADER_API_KEY],
-          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
           DELETE: [this.HEADER_API_KEY, this.HEADER_TOKEN],
         },
         params: ['id'],
-        methods: [this.METHODS[0], this.METHODS[2], this.METHODS[3]],
+        methods: [this.METHODS[0], this.METHODS[3]],
+      },
+      {
+        path: '/api/user/:id/change/data',
+        headers: {
+          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
+        },
+        params: ['id'],
+        methods: [this.METHODS[2]],
+      },
+      {
+        path: '/api/user/:id/change/email',
+        headers: {
+          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
+        },
+        params: ['id'],
+        methods: [this.METHODS[2]],
+      },
+      {
+        path: '/api/user/:id/change/password',
+        headers: {
+          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
+        },
+        params: ['id'],
+        methods: [this.METHODS[2]],
       },
     ];
   },

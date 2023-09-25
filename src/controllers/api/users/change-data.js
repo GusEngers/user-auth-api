@@ -3,9 +3,7 @@ const { STATUS_INACTIVE } = require('../../../utils/constants');
 
 async function changeData({ _id, api_key, data }) {
   try {
-    const user = await User.findOne({ _id, api_key }).select(
-      '-password -register_date -admin'
-    );
+    const user = await User.findOne({ _id, api_key });
     if (!user) {
       throw { message: 'Usuario no encontrado', status: 404 };
     }
