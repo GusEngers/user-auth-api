@@ -7,7 +7,7 @@ function verifyAuthToken(req, res, next) {
   const token = req.header(HEADER_TOKEN);
   if (!token)
     return handleApiError(res, 401, [
-      "Para acceder debe proporcionar la cabecera 'X-Authorization-Token'",
+      `Para acceder debe proporcionar la cabecera '${HEADER_TOKEN}'`,
     ]);
   try {
     const verified = jwt.verify(token, process.env.TOKEN);
