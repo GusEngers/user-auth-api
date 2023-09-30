@@ -17,8 +17,7 @@ router
   });
 
 router.get('/docs', (req, res) => {
-  const links = [{ name: 'POST - Registrar Usuario', id: '#register' }];
-  res.render('docs', { links });
+  res.render('docs');
 });
 
 module.exports = router;

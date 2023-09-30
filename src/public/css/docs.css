@@ -7,14 +7,27 @@
 }
 
 .index-container {
-  width: 25%;
+  width: 30%;
 }
 
 .docs-container {
-  width: 75%;
+  width: 70%;
   padding: 0 20px;
   background-color: #1a1a1a;
-  height: 100%;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.title-docs {
+  color: #00ffb3;
+  font-size: 50px;
+  margin: 20px 0 0 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.docs-container::-webkit-scrollbar {
+  width: 0;
 }
 
 .post {
@@ -23,6 +36,14 @@
 
 .get {
   color: greenyellow;
+}
+
+.delete {
+  color: red;
+}
+
+.put {
+  color: blueviolet;
 }
 
 .route {
@@ -43,8 +64,13 @@
 
 .title-section {
   color: #00ffb3;
+  text-transform: uppercase;
 }
 
-.subtitle-section {
-  color: wheat;
+a {
+  color: #00ffb3;
+}
+
+a:hover {
+  cursor: pointer;
 }

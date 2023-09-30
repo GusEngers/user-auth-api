@@ -1,6 +1,12 @@
 <div class="docs-container">
-  <hr class="primary-line" />
-  <section id="auth">
+  <hr id="docs" class="primary-line" />
+
+  <h1 class="title-docs">USER-AUTH-API DOCUMENTACIÓN</h1>
+  <p>Documentación para una perfecta utilización de <b>User-Auth-Api</b>, presenta los distintos recursos disponibles, como así también sus configuraciones, resultados esperados y posibles errores</p>
+
+  <hr id="auth" class="primary-line" />
+
+  <section>
     <h2 class="title-section">Autenticación y Autorización</h2>
     <p>
       La sección de <b>Autenticación y Autorización</b> se compone de rutas cuya
@@ -10,10 +16,10 @@
       <a href="/">Api-Key</a>.
     </p>
 
-    <hr class="secondary-line">
+    <hr id="auth-auth" class="secondary-line">
 
-    <section id="auth-auth">
-      <h3 class="subtitle-section">Autorización de Usuario</h3>
+    <section>
+      <h3>Autorización de Usuario</h3>
       <h4><span class="post">POST</span> - <span class="route">/api/auth</span></h4>
       <p>Recibe el token generado en el <a href="#auth-login">Inicio de Sesión</a>, verifica su autenticidad y lo autoriza. Esta ruta se emplea para verificar sesiones de usuarios en el cliente.</p>
 
@@ -39,10 +45,10 @@
 }` %></code></pre>
     </section>
 
-    <hr class="secondary-line">
+    <hr id="auth-register" class="secondary-line">
 
-    <section id="auth-register">
-      <h3 class="subtitle-section">Registro de Usuario</h3>
+    <section>
+      <h3>Registro de Usuario</h3>
       <h4><span class="post">POST</span> - <span class="route">/api/auth/register</span></h4>
       <p>Crea un nuevo usuario y lo añade a la base de datos. En caso de que ya exista el usuario, pero esté inactivo, lo vuelve a establecer su estado en activo. Además de la Api-Key, esta ruta también debe recibir un body con el e-mail, contraseña y, opcionalmente, una propiedad donde se podrá añadir datos extras.</p>
 
@@ -62,10 +68,10 @@
 <pre><code class="language-json"><%= `{
   "msg": "Usuario creado exitosamente",
   "user": {
+    "_id": "\<-- Id del usuario -->",
     "email": "ejemplo@email.com",
     "status": "active",
-    "register_date": "2023-09-30T01:21:40.673Z",
-    "_id": "651786685930b05d64eb0d21"
+    "register_date": "\<-- Fecha de registro -->"
   }
 }` %></code></pre>
 
@@ -86,10 +92,10 @@
 }` %></code></pre>
     </section>
 
-    <hr class="secondary-line">
+    <hr id="auth-login" class="secondary-line">
 
-    <section id="auth-login">
-      <h3 class="subtitle-section">Inicio de Sesión de Usuario</h3>
+    <section>
+      <h3>Inicio de Sesión de Usuario</h3>
       <h4><span class="post">POST</span> - <span class="route">/api/auth/login</span></h4>
       <p>Genera un token de sesión para el usuario luego de verificar sus datos de e-mail y contraseña. En caso de que el usuario esté inactivo no generará el token. Además de la Api-Key, esta ruta también debe recibir un body con el e-mail y contraseña.</p>
 
@@ -135,19 +141,19 @@
     </section>
   </section>
 
-  <hr class="primary-line" />
+  <hr id="user" class="primary-line" />
 
-  <section id="user">
+  <section>
     <h2 class="title-section">Datos de Usuario</h2>
     <p>
-      La sección de <b>Datos</b> se compone de rutas cuya
+      La sección de <b>Datos de Usuario</b> se compone de rutas cuya
       finalidad es obtener, modificar y eliminar usuarios registrados. Para utilizar estas rutas es necesario disponer de una <a href="/">Api-Key</a> y un <a href="#auth-login">Token</a> (en la mayoría de los casos).
     </p>
 
-    <hr class="secondary-line">
+    <hr id="user-user" class="secondary-line">
 
-    <section id="user-user">
-      <h3 class="subtitle-section">Obtener Usuario</h3>
+    <section>
+      <h3>Obtener Usuario</h3>
       <h4><span class="get">GET</span> - <span class="route">/api/user/:id</span></h4>
       <p>Obtiene los datos del usuario perteneciente al id proporcionado.</p>
 
@@ -183,6 +189,311 @@
   "errors": [
     "Usuario no encontrado"
   ]
+}` %></code></pre>
+    </section>
+
+    <hr id="user-delete" class="secondary-line" />
+
+    <section>
+      <h3>Eliminar Usuario</h3>
+      <h4><span class="delete">DELETE</span> - <span class="route">/api/user/:id</span></h4>
+      <p>Modifica el "status" del usuario indicado por su id. Además, solamente el usuario mismo puede eliminarse, cuyo dato se verifica a tráves de su token de acceso.</p>
+
+      <h4>Configuración de Petición</h4>      
+<pre><code class="language-json"><%= `{
+  "headers": {
+    "X-Authorization-Token": "\<--Token-de-Sesión-->",
+    "X-Authorization-Api-Key": "\<--Api-Key-->"
+  },
+  "params": {
+    "id": "\<-- ID del usuario en formato BSON hexadecimal -->"
+  }
+}` %></code></pre>
+
+    <h4><span class="status-200">200 - OK</span></h4>
+<pre><code class="language-json"><%= `{
+  "msg": "El usuario se eliminó satisfactoriamente"
+}` %></code></pre>
+
+    <h4><span class="status-400">400 - BAD REQUEST</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 400,
+  "errors": [
+    "El usuario ya se encuentra inactivo"
+  ]
+}` %></code></pre>
+    <h4><span class="status-400">404 - NOT FOUND</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 404,
+  "errors": [
+    "Usuario no encontrado"
+  ]
+}` %></code></pre>
+<h4><span class="status-400">403 - FORBIDDEN</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 403,
+  "errors": [
+    "Solo el usuario original puede administrar este usuario"
+  ]
+}` %></code></pre>
+    </section>
+
+    <hr id="user-change-data" class="secondary-line" />
+
+    <section>
+      <h3>Modificar Información Extra</h3>
+      <h4><span class="put">PUT</span> - <span class="route">/api/user/:id/change/data</span></h4>
+      <p>Modifica el campo de información extra (si está presente). Es importante saber que para modificar este campo es necesario enviar todos los datos otra vez (la información que se mantendrá más la información nueva o modificada).</p>
+
+      <h4>Configuración de Petición</h4>      
+<pre><code class="language-json"><%= `{
+  "headers": {
+    "X-Authorization-Token": "\<--Token-de-Sesión-->",
+    "X-Authorization-Api-Key": "\<--Api-Key-->"
+  },
+  "params": {
+    "id": "\<-- ID del usuario en formato BSON hexadecimal -->"
+  },
+  "body": "\<-- Datos a modificar, agregar o eliminar (un objeto o un array)-->"
+}` %></code></pre>
+
+    <h4><span class="status-200">200 - OK</span></h4>
+<pre><code class="language-json"><%= `{
+  "msg": "Se actualizó la información del usuario",
+  "user": {
+    "_id": "\<-- Id del usuario -->",
+    "email": "ejemplo@email.com",
+    "status": "active",
+    "register_date": "\<-- Fecha de registro -->",
+    "data": "\<-- Información extra añadida o modificada -->"
+  }
+}` %></code></pre>
+
+    <h4><span class="status-400">400 - BAD REQUEST</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 400,
+  "errors": [
+    "Es necesario la nueva información para actualizar el usuario"
+  ]
+}` %></code></pre>
+
+<h4><span class="status-400">400 - BAD REQUEST</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 400,
+  "errors": [
+    "El usuario se encuentra inactivo"
+  ]
+}` %></code></pre>
+    <h4><span class="status-400">404 - NOT FOUND</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 404,
+  "errors": [
+    "Usuario no encontrado"
+  ]
+}` %></code></pre>
+<h4><span class="status-400">403 - FORBIDDEN</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 403,
+  "errors": [
+    "Solo el usuario original puede administrar este usuario"
+  ]
+}` %></code></pre>
+    </section>
+
+    <hr id="user-change-email" class="secondary-line">
+
+    <section>
+      <h3>Modificar E-mail del Usuario</h3>
+      <h4><span class="put">PUT</span> - <span class="route">/api/user/:id/change/email</span></h4>
+      <p>Modifica el e-mail del usuario indicado por su id</p>
+
+      <h4>Configuración de Petición</h4>      
+<pre><code class="language-json"><%= `{
+  "headers": {
+    "X-Authorization-Token": "\<--Token-de-Sesión-->",
+    "X-Authorization-Api-Key": "\<--Api-Key-->"
+  },
+  "params": {
+    "id": "\<-- ID del usuario en formato BSON hexadecimal -->"
+  },
+  "body": {
+    "email": "\<-- Nuevo e-mail del usuario con un formato válido -->"
+  }
+}` %></code></pre>
+
+    <h4><span class="status-200">200 - OK</span></h4>
+<pre><code class="language-json"><%= `{
+  "msg": "Se actualizó el e-mail del usuario",
+  "user": {
+    "_id": "\<-- Id del usuario -->",
+    "email": "ejemplo@email.com",
+    "status": "active",
+    "register_date": "\<-- Fecha de registro -->",
+    "data": "\<-- Información extra añadida o modificada -->"
+  }
+}` %></code></pre>
+
+    <h4><span class="status-400">400 - BAD REQUEST</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 400,
+  "errors": [
+    "Los datos del e-mail son necesarios",
+    "El e-mail ingresado no tiene un formato válido"
+  ]
+}` %></code></pre>
+
+<h4><span class="status-400">400 - BAD REQUEST</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 400,
+  "errors": [
+    "El usuario se encuentra inactivo"
+  ]
+}` %></code></pre>
+    <h4><span class="status-400">404 - NOT FOUND</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 404,
+  "errors": [
+    "Usuario no encontrado"
+  ]
+}` %></code></pre>
+<h4><span class="status-400">403 - FORBIDDEN</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 403,
+  "errors": [
+    "Solo el usuario original puede administrar este usuario"
+  ]
+}` %></code></pre>
+    </section>
+
+    <hr id="user-change-password" class="secondary-line">
+
+    <section>
+      <h3>Modificar Contraseña del Usuario</h3>
+      <h4><span class="put">PUT</span> - <span class="route">/api/user/:id/change/password</span></h4>
+      <p>Modifica la contraseña del usuario indicado por su id</p>
+
+      <h4>Configuración de Petición</h4>      
+<pre><code class="language-json"><%= `{
+  "headers": {
+    "X-Authorization-Token": "\<--Token-de-Sesión-->",
+    "X-Authorization-Api-Key": "\<--Api-Key-->"
+  },
+  "params": {
+    "id": "\<-- ID del usuario en formato BSON hexadecimal -->"
+  },
+  "body": {
+    "password": "\<-- Nuevo contraseña del usuario con un formato válido -->"
+  }
+}` %></code></pre>
+
+    <h4><span class="status-200">200 - OK</span></h4>
+<pre><code class="language-json"><%= `{
+  "msg": "Se actualizó la contraseña del usuario"
+}` %></code></pre>
+
+    <h4><span class="status-400">400 - BAD REQUEST</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 400,
+  "errors": [
+    "Los datos de la contraseña son necesarios",
+    "La contraseña debe tener letras, números y un mínimo de 8 caracteres"
+  ]
+}` %></code></pre>
+
+<h4><span class="status-400">400 - BAD REQUEST</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 400,
+  "errors": [
+    "El usuario se encuentra inactivo"
+  ]
+}` %></code></pre>
+    <h4><span class="status-400">404 - NOT FOUND</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 404,
+  "errors": [
+    "Usuario no encontrado"
+  ]
+}` %></code></pre>
+<h4><span class="status-400">403 - FORBIDDEN</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 403,
+  "errors": [
+    "Solo el usuario original puede administrar este usuario"
+  ]
+}` %></code></pre>
+    </section>
+  </section>
+
+  <hr id="error" class="primary-line" />
+
+  <section>
+    <h2 class="title-section">Errores Globales</h2>
+    <p>
+      La sección de <b>Errores Globales</b> se compone de respuestas generales cuando hay algún error de caracter global.
+    </p>
+
+    <hr id="error-api-key" class="secondary-line">
+
+    <section>
+      <h3>Api-Key</h3>
+      <p>Errores relacionados con la Api-Key, se generan cuando no se proporciona el header "X-Authorization-Api-Key", cuando la Api-Key no tiene un formato válido o cuando la Api-Key no existe.</p>
+
+    <h4><span class="status-400">401 - UNAUTHORIZED</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 401,
+  "errors": [
+    "Para acceder debe proporcionar la cabecera 'X-Authorization-Api-Key'"
+  ]
+}` %></code></pre>
+    <h4><span class="status-400">403 - FORBIDDEN</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 403,
+  "errors": [
+    "La Api-Key no tiene un formato válido"
+  ]
+}` %></code></pre>
+    <h4><span class="status-400">404 - NOT FOUND</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 404,
+  "errors": [
+    "La Api-Key proporcionada no existe"
+  ]
+}` %></code></pre>
+  </section>
+
+  <hr id="error-token" class="secondary-line">
+
+    <section>
+      <h3>Token</h3>
+      <p>Errores relacionados con Token de Sesión, se generan cuando no se proporciona el header "X-Authorization-Token" o cuando se presenta un token inválido.</p>
+
+    <h4><span class="status-400">401 - UNAUTHORIZED</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 401,
+  "errors": [
+    "Para acceder debe proporcionar la cabecera 'X-Authorization-Token'"
+  ]
+}` %></code></pre>
+    <h4><span class="status-400">401 - UNAUTHORIZED</span></h4>
+<pre><code class="language-json"><%= `{
+  "status": 401,
+  "errors": [
+    "El token proporcionado es inválido"
+  ]
+}` %></code></pre>
+    </section>
+
+    <hr id="error-not-found" class="secondary-line">
+
+    <section>
+      <h3>Ruta Inexistente</h3>
+      <p>Error generado cuando se accede a una ruta inexistente en la API.</p>
+
+    <h4><span class="status-400">404 - NOT FOUND</span></h4>
+<pre><code class="language-json"><%= `{
+  "msg": 'La ruta a la que intenta acceder no existe',
+  "status": 404,
+  "links": "\<-- Array con todas las rutas disponibles en la API, junto con los datos necesarios para poder usarlas -->",
 }` %></code></pre>
     </section>
 

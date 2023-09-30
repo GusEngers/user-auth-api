@@ -23,7 +23,8 @@ async function verifyEmail(req, res, next) {
     }
     return res.render('home', {
       error: null,
-      info: 'Actualmente ya posees una api-key, te la volvimos a enviar. ¡Revisa tu correo!',
+      // info: 'Actualmente ya posees una api-key, te la volvimos a enviar. ¡Revisa tu correo!',
+      info: `Momentaneamente no disponemos de servicio de notificación por correo. Actualmente ya posee una Api-Key: '${api._id}'`
     });
   } catch (error) {
     return res.render('home', {
