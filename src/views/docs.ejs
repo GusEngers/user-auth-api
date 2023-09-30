@@ -3,58 +3,14 @@
   <head>
     <%- include('_components/global-head', {title: 'User-Auth - Documentación'})
     %>
+    <link rel="stylesheet" href="/public/css/docs.css">
     <link rel="stylesheet" href="/public/css/prism.css" />
   </head>
   <body>
     <%- include('_components/nav-bar') %>
-    <main>
-      <div class="container-docs">
-        <h1>Aquí irá la documentación</h1>
-
-        <section id="global-errors">
-          <h1>Api-Key</h1>
-          <p class="description">
-            Los errores presentados relacionados con la <b>Api-Key</b> son los
-            siguientes
-          </p>
-
-          <h2>Api-Key no proporcionada</h2>
-          <p>Para acceder a las funcionalidades de la API es necesario indicar un header "Api-Key"</p>
-          <h3><span class="status-400">401</span> - Unauthorized</h3>
-          <pre><code class="language-json">
-<%= `{
-  "status": 401,
-  "errors": [
-    "Para acceder debe proporcionar la cabecera 'Api-Key'"
-  ]
-}` %>
-          </code></pre>
-
-          <h2>Formato de Api-Key</h2>
-          <p>Para guardar la información se utiliza MongoDB como Base de Datos, entonces los identificadores deben seguir un formato específico (BSON de 12 bytes con formato hexadecimal)</p>
-          <h3><span class="status-400">403</span> - Forbidden</h3>
-          <pre><code class="language-json">
-<%= `{
-  "status": 403,
-  "errors": [
-    "La Api-Key no tiene un formato válido"
-  ]
-}` %>
-          </code></pre>
-
-          <h2>Api-Key inexistente</h2>
-          <p>Para acceder a las funcionalidades de la API es necesario indicar una Api-Key existente</p>
-          <h3><span class="status-400">404</span> - Not Found</h3>
-          <pre><code class="language-json">
-<%= `{
-  "status": 404,
-  "errors": [
-    "La Api-Key proporcionada no existe"
-  ]
-}` %>
-          </code></pre>
-        </section>
-      </div>
+    <main class="container">
+      <%- include('_components/index-docs') %>
+      <%- include('_components/list-docs') %>
     </main>
 
     <!-- Scripts -->

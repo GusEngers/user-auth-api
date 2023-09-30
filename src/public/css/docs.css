@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.index-container {
+  width: 25%;
+}
+
+.docs-container {
+  width: 75%;
+  padding: 0 20px;
+  background-color: #1a1a1a;
+  height: 100%;
+}
+
+.post {
+  color: yellow;
+}
+
+.get {
+  color: greenyellow;
+}
+
+.route {
+  color: wheat;
+}
+
+.status-200 {
+  color: green;
+}
+
+.status-400 {
+  color: red;
+}
+
+.primary-line {
+  border-color: #00ffb3;
+}
+
+.title-section {
+  color: #00ffb3;
+}
+
+.subtitle-section {
+  color: wheat;
+}
