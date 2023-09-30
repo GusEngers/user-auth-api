@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
   try {
     if (!header) {
       return handleApiError(res, 401, [
-        "Para acceder debe proporcionar la cabecera 'Api-Key'",
+        `Para acceder debe proporcionar la cabecera 'X-Authorization-Api-Key'`,
       ]);
     }
 

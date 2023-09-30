@@ -13,7 +13,10 @@ async function registerUser({ email, password, admin, data, api_key }) {
     await user.save();
     return user;
   } catch (error) {
-    throw new Error(`Error ocurrido durante el registro: ${error.message}`);
+    throw {
+      message: `Error ocurrido durante el registro: ${error.message}`,
+      status: 400,
+    };
   }
 }
 

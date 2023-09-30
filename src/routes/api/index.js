@@ -10,7 +10,7 @@ router.get('/*', (req, res) => {
   res.status(404).json({
     msg: 'La ruta a la que intenta acceder no existe',
     status: 404,
-    links: LINKS_API
+    links: LINKS_API,
   });
 });
 

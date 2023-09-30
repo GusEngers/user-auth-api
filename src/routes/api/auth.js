@@ -20,7 +20,8 @@ router.post('/', verifyAuthToken, async (req, res) => {
     });
     res.json({ msg });
   } catch (error) {
-    return handleApiError(res, 401, [error.message]);
+    const status = error.status ?? 400
+    return handleApiError(res, status, [error.message]);
   }
 });
 
@@ -32,7 +33,8 @@ router.post('/register', verifyBody, verifyUser, async (req, res) => {
     });
     res.status(201).json({ msg: 'Usuario creado exitosamente', user });
   } catch (error) {
-    return handleApiError(res, 400, [error.message]);
+    const status = error.status ?? 400
+    return handleApiError(res, status, [error.message]);
   }
 });
 
@@ -44,7 +46,8 @@ router.post('/login', verifyBody, async (req, res) => {
     });
     res.status(201).json({ msg: 'Inicio de sesión exitoso', token });
   } catch (error) {
-    return handleApiError(res, 400, [error.message]);
+    const status = error.status ?? 400
+    return handleApiError(res, status, [error.message]);
   }
 });
 

@@ -1,7 +1,7 @@
 module.exports = {
   METHODS: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  HEADER_TOKEN: 'Token',
-  HEADER_API_KEY: 'Api-Key',
+  HEADER_TOKEN: 'X-Authorization-Token',
+  HEADER_API_KEY: 'X-Authorization-Api-Key',
   STATUS_ACTIVE: 'active',
   STATUS_INACTIVE: 'inactive',
   get LINKS_API() {

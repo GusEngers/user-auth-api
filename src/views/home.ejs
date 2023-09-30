@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    [%- include('_components/global-head', { title: 'User-Auth - Home'}) %]
+    <%- include('_components/global-head', {title: 'User-Auth - Inicio'}) %>
     <link rel="stylesheet" href="/public/css/home.css" />
   </head>
   <body>
-    [%- include('_components/nav-bar') %]
+    <%- include('_components/nav-bar') %>
     <main>
       <h1 class="title-home">User-Auth-Api</h1>
       <h2>Administra tus usuarios fácilmente</h2>
@@ -16,12 +16,11 @@
         hoy mismo!
       </p>
 
-      [% if(error) { %]
-      <p class="error-message">[%= error %]</p>
-      [% } %]
-      [% if(info) { %]
-      <p class="info-message">[%= info %]</p>
-      [% } %]
+      <% if (error) { %>
+      <p class="error-message"><%= error %></p>
+      <% } %> <% if (info) { %>
+      <p class="info-message"><%= info %></p>
+      <% } %>
 
       <form action="/" method="post" id="form-home" class="form-home">
         <label for="email">Ingrese su e-mail por favor</label>
@@ -39,7 +38,7 @@
     </main>
 
     <!-- Scripts -->
-    [%- include('_components/global-script') %]
+    <%- include('_components/global-script') %>
     <script src="/public/js/home.js"></script>
   </body>
 </html>
