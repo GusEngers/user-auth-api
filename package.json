@@ -1,11 +1,11 @@
 {
   "name": "user-auth-api",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Servicio de almacenamiento, autenticación y autorización de usuarios",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "set NODE_ENV=production&& node index.js",
+    "dev": "set NODE_ENV=development&& nodemon index.js"
   },
   "author": "Engers Gustavo",
   "license": "ISC",

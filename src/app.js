@@ -8,8 +8,7 @@ const client = require('./routes/client');
 const api = require('./routes/api');
 const ApiKey = require('./models/api-key');
 const User = require('./models/user');
-
-require('dotenv').config();
+const { isProduction } = require('./utils/constants');
 
 const app = express();
 
@@ -19,10 +18,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
+app.use(require('morgan')('dev'));
 
-if (process.env.NODE_ENV === 'dev') {
-  console.log('[INFO] Dev mode enabled');
-  app.use(require('morgan')('dev'));
+if (isProduction()) {
+  process.stdout.write('[INFO] Dev mode enabled\n');
 
   app.get('/todos', async (req, res) => {
     const api_keys = await ApiKey.find({});

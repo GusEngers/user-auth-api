@@ -1,59 +1,15 @@
+require('dotenv').config();
+
 module.exports = {
-  METHODS: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  HEADER_TOKEN: 'X-Authorization-Token',
-  HEADER_API_KEY: 'X-Authorization-Api-Key',
+  // Configuración de la Aplicación
+  PORT: process.env.PORT || 3000,
+  DB_URI: process.env.DB_URI,
+  TOKEN: process.env.TOKEN,
+  isProduction: () => process.env.NODE_ENV === 'development',
+
+  // Constantes de la Aplicación
+  HEADER_TOKEN: 'x-authorization-token',
+  HEADER_API_KEY: 'x-authorization-api-key',
   STATUS_ACTIVE: 'active',
   STATUS_INACTIVE: 'inactive',
-  get LINKS_API() {
-    return [
-      {
-        path: '/api/auth',
-        headers: { POST: [this.HEADER_API_KEY, this.HEADER_TOKEN] },
-        methods: [this.METHODS[1]],
-      },
-      {
-        path: '/api/auth/register',
-        headers: { POST: [this.HEADER_API_KEY] },
-        methods: [this.METHODS[1]],
-      },
-      {
-        path: '/api/auth/login',
-        headers: { POST: [this.HEADER_API_KEY] },
-        methods: [this.METHODS[1]],
-      },
-      {
-        path: '/api/user/:id',
-        headers: {
-          GET: [this.HEADER_API_KEY],
-          DELETE: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[0], this.METHODS[3]],
-      },
-      {
-        path: '/api/user/:id/change/data',
-        headers: {
-          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[2]],
-      },
-      {
-        path: '/api/user/:id/change/email',
-        headers: {
-          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[2]],
-      },
-      {
-        path: '/api/user/:id/change/password',
-        headers: {
-          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[2]],
-      },
-    ];
-  },
 };
