@@ -8,8 +8,8 @@ module.exports = {
   isProduction: () => process.env.NODE_ENV === 'development',
 
   // Constantes de la Aplicación
-  HEADER_TOKEN: 'x-authorization-token',
-  HEADER_API_KEY: 'x-authorization-api-key',
+  X_AUTHORIZATION_TOKEN: 'x-authorization-token',
+  X_AUTHORIZATION_API_KEY: 'x-authorization-api-key',
   STATUS_ACTIVE: 'active',
   STATUS_INACTIVE: 'inactive',
 };

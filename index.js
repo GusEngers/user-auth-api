@@ -1,19 +1,18 @@
 const app = require('./src/app');
-const db = require('./src/db');
+const { db } = require('./src/config/db');
 const { PORT } = require('./src/utils/constants');
 
 /**
- * Función encargada de ejecutar la conexión de la base de datos e iniciar
- * el servidor
+ * @description Ejecuta la conexión a la base de datos y pone en marcha el servidor
  */
 async function main() {
   try {
     await db();
     app.listen(PORT, () => {
-      process.stdout.write(`[INFO] Server listening on port: ${PORT}\n`);
+      console.log(`[INFO] Server listening on port: ${PORT}`);
     });
   } catch (error) {
-    process.stdout.write(`[ERROR] Error starting server: ${error}\n`);
+    console.log(`[ERROR] Error starting server: ${error.message}`);
     process.exit(1);
   }
 }
