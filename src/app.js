@@ -4,8 +4,9 @@ const handleCors = require('./utils/handleCors');
 const handleError = require('./utils/handleError');
 const handleNotFound = require('./utils/handleNotFound');
 const handleHeaderApiKey = require('./utils/handleHeaderApiKey');
-const client = require('./routes/client');
-const api = require('./routes/api');
+
+const client = require('./client/routes');
+const api = require('./api/routes');
 
 const app = express();
 
