@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 const { STATUS_ACTIVE, STATUS_INACTIVE } = require('../utils/constants');
 
+/**
+ * @description Modelo para administrar Usuarios
+ */
 const User = model(
   'user',
   new Schema({
@@ -30,7 +33,6 @@ const User = model(
       type: Date,
       default: Date.now(),
     },
-    data: { type: Schema.Types.Mixed },
   })
 );
 
