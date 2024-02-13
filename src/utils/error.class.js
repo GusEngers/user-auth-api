@@ -1,17 +1,21 @@
 /**
- * Error personalizado para solicitudes HTTP
+ * @description Error personalizado para respuestas HTTP
  */
 class ResponseError extends Error {
-  constructor(message, statusCode = 500, errors = []) {
+  /**
+   * @param {string} message Mensaje genérico del error
+   * @param {number} statusCode Código de estado HTTP
+   * @param {[string]} errors Lista opcional de errores personalizados
+   */
+  constructor(message, statusCode, errors = []) {
     super(message);
     this.statusCode = statusCode;
     this.errors = errors;
   }
 
   /**
-   * Retorna un objeto con los datos del mensaje de error,
-   * el código de estado HTTP y los errores adicionales si
-   * están disponibles
+   * @description Genera un objeto con el mensaje, código de estado y errores opcionales
+   * @returns Objeto de error
    */
   get response() {
     if (!this.errors.length) {
@@ -28,4 +32,4 @@ class ResponseError extends Error {
   }
 }
 
-module.exports = ResponseError;
+module.exports = { ResponseError };
