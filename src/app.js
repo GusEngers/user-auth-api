@@ -19,7 +19,7 @@ app.set('views', __dirname + '/client/views');
 app.use(require('morgan')('dev'));
 
 app.use('/', client);
-app.use('/api', handleCors, handleHeaderApiKey, api);
+app.use('/v3/api', handleCors, handleHeaderApiKey, api);
 
 app.use(handleError);
 app.use(handleNotFound);
