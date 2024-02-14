@@ -1,3 +1,6 @@
+const { X_AUTHORIZATION_API_KEY } = require('../../utils/constants');
+const { usersService } = require('../services');
+
 /**
  * @description Controlador para obtener una lista de usuarios
  * @param {import("express").Request} req Request
@@ -6,9 +9,12 @@
  */
 async function getUsers(req, res, next) {
   try {
-    
+    const api_key = req.header(X_AUTHORIZATION_API_KEY);
+    const { omit, limit, status } = req.query;
+    const users = await usersService.getUsers(api_key, omit, limit, status);
+    res.json(users);
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
@@ -20,9 +26,8 @@ async function getUsers(req, res, next) {
  */
 async function getUser(req, res, next) {
   try {
-    
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
@@ -34,9 +39,8 @@ async function getUser(req, res, next) {
  */
 async function patchUser(req, res, next) {
   try {
-    
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
@@ -48,9 +52,8 @@ async function patchUser(req, res, next) {
  */
 async function deleteUser(req, res, next) {
   try {
-    
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
