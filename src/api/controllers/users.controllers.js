@@ -43,6 +43,10 @@ async function getUser(req, res, next) {
  */
 async function patchUser(req, res, next) {
   try {
+    const api_key = req.header(X_AUTHORIZATION_API_KEY);
+    const id = req.params.id;
+    await usersService.patchUser(api_key, id, req.body);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }

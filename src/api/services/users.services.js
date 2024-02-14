@@ -1,5 +1,7 @@
+const { STATUS_INACTIVE } = require('../../utils/constants');
 const { ResponseError } = require('../../utils/error.class');
 const User = require('../models/user');
+const { hashPassword } = require('./utils/hash_password');
 
 /**
  * @description Obtiene una lista de usuarios de la base de datos
@@ -31,7 +33,29 @@ async function getUsers(api_key, omit = 0, limit = 10, status = 'all') {
 async function getUser(api_key, _id) {
   const user = await User.findOne({ api_key, _id }).select('-password -api_key').lean();
   if (!user) throw new ResponseError('User not found', 404);
+  if (user.status === STATUS_INACTIVE) throw new ResponseError('Inactive user', 403);
   return user;
 }
 
-module.exports = { getUsers, getUser };
+/**
+ * @description Modifica el email, la contraseña o ambos de un usuario según su id
+ * @param {string} api_key API-KEY del cliente
+ * @param {string} _id ID del usuario
+ * @param {{email: string|undefined, password: string|undefined}} data Nuevo email o contraseña
+ */
+async function patchUser(api_key, _id, data) {
+  // Buscar el usuario y verificar su estado
+  const user = await User.findOne({ api_key, _id }).select('-api_key');
+  if (!user) throw new ResponseError('User not found', 404);
+  if (user.status === STATUS_INACTIVE) throw new ResponseError('Inactive user', 403);
+  // Añadir los nuevos datos
+  if (data.email !== undefined) {
+    user.email = data.email;
+  }
+  if (data.password !== undefined) {
+    const password = await hashPassword(data.password);
+    user.password = password;
+  }
+  await user.save();
+}
+module.exports = { getUsers, getUser, patchUser };
