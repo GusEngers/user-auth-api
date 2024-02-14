@@ -13,7 +13,7 @@ function handleNotFound(req, res, next) {
     });
   }
   // Not Found - Sección Client
-  res.render('not-found');
+  res.render('pages/not_found');
 }
 
 module.exports = { handleNotFound };
