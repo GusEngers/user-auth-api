@@ -1,4 +1,3 @@
-const { STATUS_ACTIVE, STATUS_INACTIVE } = require('../../utils/constants');
 const { ResponseError } = require('../../utils/error.class');
 const User = require('../models/user');
 
@@ -23,4 +22,16 @@ async function getUsers(api_key, omit = 0, limit = 10, status = 'all') {
   return users;
 }
 
-module.exports = { getUsers };
+/**
+ * @description Obtiene los datos de un usuario según su id
+ * @param {string} api_key API-KEY del cliente
+ * @param {string} _id ID del usuario
+ * @returns Datos del usuario
+ */
+async function getUser(api_key, _id) {
+  const user = await User.findOne({ api_key, _id }).select('-password -api_key').lean();
+  if (!user) throw new ResponseError('User not found', 404);
+  return user;
+}
+
+module.exports = { getUsers, getUser };

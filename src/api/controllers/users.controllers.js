@@ -26,6 +26,10 @@ async function getUsers(req, res, next) {
  */
 async function getUser(req, res, next) {
   try {
+    const api_key = req.header(X_AUTHORIZATION_API_KEY);
+    const id = req.params.id;
+    const user = await usersService.getUser(api_key, id);
+    res.json(user);
   } catch (error) {
     next(error);
   }
