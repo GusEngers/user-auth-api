@@ -60,6 +60,10 @@ async function patchUser(req, res, next) {
  */
 async function deleteUser(req, res, next) {
   try {
+    const api_key = req.header(X_AUTHORIZATION_API_KEY);
+    const id = req.params.id;
+    await usersService.deleteUser(api_key, id);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }

@@ -1,4 +1,4 @@
-const { STATUS_INACTIVE } = require('../../utils/constants');
+const { STATUS_INACTIVE, STATUS_ACTIVE } = require('../../utils/constants');
 const { ResponseError } = require('../../utils/error.class');
 const User = require('../models/user');
 const { hashPassword } = require('./utils/hash_password');
@@ -58,4 +58,23 @@ async function patchUser(api_key, _id, data) {
   }
   await user.save();
 }
-module.exports = { getUsers, getUser, patchUser };
+
+/**
+ * @description Cambia el estado de `'active'` a `'inactive'` (si ya está inactivo lo elimina)
+ * @param {string} api_key API-KEY del cliente
+ * @param {string} _id ID del usuario
+ */
+async function deleteUser(api_key, _id) {
+  // Buscar el usuario y verificar su estado
+  const user = await User.findOne({ api_key, _id }).select('-api_key');
+  if (!user) throw new ResponseError('User not found', 404);
+  // Cambiar a inactivo en caso de que este activo o eliminarlo
+  if (user.status === STATUS_ACTIVE) {
+    user.status = STATUS_INACTIVE;
+    await user.save();
+  } else {
+    await user.deleteOne();
+  }
+}
+
+module.exports = { getUsers, getUser, patchUser, deleteUser };
