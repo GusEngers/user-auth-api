@@ -11,7 +11,7 @@ function errorHandler(err, req, res, next) {
   if (err instanceof ResponseError) {
     return res.status(err.statusCode).json(err.response);
   }
-  return res.status(500).json({ message: 'Internal server error', statusCode: 500 });
+  return res.status(500).json({ message: 'Internal server error', statusCode: 500, errors: [err.message] });
 }
 
 module.exports = { errorHandler };

@@ -1,15 +1,19 @@
 const express = require('express');
 const path = require('path');
-const handleCors = require('./utils/handleCors');
-const handleError = require('./utils/handleError');
-const handleNotFound = require('./utils/handleNotFound');
-const handleHeaderApiKey = require('./utils/handleHeaderApiKey');
 
+// MIDDLEWARES
+const { handleCors } = require('./utils/cors');
+const { handleGlobalError } = require('./utils/error');
+const { handleNotFound } = require('./utils/not_found');
+const { handleApiKey } = require('./utils/header_api_key');
+
+// RUTAS
 const client = require('./client/routes');
 const api = require('./api/routes');
 
 const app = express();
 
+// CONFIGURACIÓN DE LA APLICACIÓN
 app.disable('x-powered-by');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,9 +23,9 @@ app.set('views', __dirname + '/client/views');
 app.use(require('morgan')('dev'));
 
 app.use('/', client);
-app.use('/v3/api', handleCors, handleHeaderApiKey, api);
+app.use('/v3/api', handleCors, handleApiKey, api);
 
-app.use(handleError);
+app.use(handleGlobalError);
 app.use(handleNotFound);
 
 module.exports = app;

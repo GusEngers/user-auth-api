@@ -1,28 +1,28 @@
 const api = require('express').Router();
 
 // IMPORTAR CONTROLADORES
-const { loginController, authController, signUpController } = require('../controllers');
+const { loginController, authController, signUpController, methodNotAllowed } = require('../controllers');
 
 /**
  * @description Rutas para el manejo de API-KEY
  */
-api.route('/api_key');
+api.route('/api_key').all(methodNotAllowed);
 
 /**
  * @description Rutas para la autenticación de Usuarios
  */
-api.route('/users/login').post(loginController);
-api.route('/users/auth').post(authController);
-api.route('/users/sign_up').post(signUpController);
+api.route('/users/login').post(loginController).all(methodNotAllowed);
+api.route('/users/auth').post(authController).all(methodNotAllowed);
+api.route('/users/sign_up').post(signUpController).all(methodNotAllowed);
 
 /**
  * @description Rutas para el manejo de la colección de Usuarios
  */
-api.route('/users');
+api.route('/users').all(methodNotAllowed);
 
 /**
  * @description Rutas para el manejo individual de Usuarios
  */
-api.route('/users/:id');
+api.route('/users/:id').all(methodNotAllowed);
 
 module.exports = api;
