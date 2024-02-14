@@ -1,4 +1,3 @@
-const { JsonWebTokenError } = require('jsonwebtoken');
 const { ResponseError } = require('../../utils/error.class');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
