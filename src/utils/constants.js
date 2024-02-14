@@ -12,4 +12,8 @@ module.exports = {
   X_AUTHORIZATION_API_KEY: 'x-authorization-api-key',
   STATUS_ACTIVE: 'active',
   STATUS_INACTIVE: 'inactive',
+
+  // Expresiones reulares
+  REGEX_EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  REGEX_PASSWORD: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
 };

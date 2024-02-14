@@ -3,9 +3,10 @@ const { login, auth, signUp } = require('./auth.controllers');
 
 // IMPORTAR MIDDLEWARES
 const { errorHandler } = require('../middlewares/error');
+const { checkAuthBody } = require('../middlewares/check_body');
 
 module.exports = {
-  loginController: [login, errorHandler],
+  loginController: [checkAuthBody, login, errorHandler],
   authController: [auth, errorHandler],
-  signUpController: [signUp, errorHandler],
+  signUpController: [checkAuthBody, signUp, errorHandler],
 };
