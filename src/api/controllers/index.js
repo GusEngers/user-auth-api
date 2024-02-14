@@ -5,6 +5,7 @@ const { getUsers, getUser, patchUser, deleteUser } = require('./users.controller
 // IMPORTAR MIDDLEWARES
 const { errorHandler } = require('../middlewares/error');
 const { checkAuthBody } = require('../middlewares/check_body');
+const { checkUsersQuery } = require('../middlewares/check_query');
 
 // CONTROLADORES GLOBALES
 /**
@@ -21,7 +22,7 @@ module.exports = {
   loginController: [checkAuthBody, login, errorHandler],
   authController: [auth, errorHandler],
   signUpController: [checkAuthBody, signUp, errorHandler],
-  getUsersController: [getUsers, errorHandler],
+  getUsersController: [checkUsersQuery, getUsers, errorHandler],
   getUserController: [getUser, errorHandler],
   patchUserController: [patchUser, errorHandler],
   deleteUserController: [deleteUser, errorHandler],
