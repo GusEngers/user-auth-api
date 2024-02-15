@@ -7,6 +7,7 @@ const { errorHandler } = require('../middlewares/error');
 const { checkAuthBody, checkUserBody } = require('../middlewares/check_body');
 const { checkUsersQuery } = require('../middlewares/check_query');
 const { checkUserIdParam } = require('../middlewares/check_params');
+const { checkSameUser } = require('../middlewares/check_token');
 
 // CONTROLADORES GLOBALES
 /**
@@ -25,7 +26,7 @@ module.exports = {
   signUpController: [checkAuthBody, signUp, errorHandler],
   getUsersController: [checkUsersQuery, getUsers, errorHandler],
   getUserController: [checkUserIdParam, getUser, errorHandler],
-  patchUserController: [checkUserIdParam, checkUserBody, patchUser, errorHandler],
-  deleteUserController: [checkUserIdParam, deleteUser, errorHandler],
+  patchUserController: [checkUserIdParam, checkSameUser, checkUserBody, patchUser, errorHandler],
+  deleteUserController: [checkUserIdParam, checkSameUser, deleteUser, errorHandler],
   methodNotAllowed,
 };
