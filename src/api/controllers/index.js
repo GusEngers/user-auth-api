@@ -2,6 +2,7 @@
 const { login, auth, signUp } = require('./auth.controllers');
 const { getUsers, getUser, patchUser, deleteUser } = require('./users.controllers');
 const { getRegister, changeStatus, changeAdmin } = require('./admin.controllers');
+const { postApiKey } = require('./api_key.controllers');
 
 // IMPORTAR MIDDLEWARES
 const { errorHandler } = require('../middlewares/error');
@@ -32,5 +33,6 @@ module.exports = {
   getRegisterController: [checkAdmin, checkAdminTypeParam, checkAdminUsersQuery, getRegister, errorHandler],
   changeStatusController: [checkAdmin, checkUserIdParam, changeStatus, errorHandler],
   changeAdminController: [checkAdmin, checkUserIdParam, changeAdmin, errorHandler],
+  postApiKeyController: [postApiKey, errorHandler],
   methodNotAllowed,
 };
