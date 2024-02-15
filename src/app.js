@@ -23,7 +23,7 @@ app.set('views', __dirname + '/client/views');
 app.use(require('morgan')('dev'));
 
 app.use('/', client);
-app.use('/v3/api', handleCors, handleApiKey, api);
+app.use('/v3', handleCors, handleApiKey, api);
 
 app.use(handleGlobalError);
 app.use(handleNotFound);
