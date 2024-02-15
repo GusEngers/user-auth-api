@@ -29,6 +29,7 @@ async function changeStatus(req, res, next) {
   try {
     const api_key = req.header(X_AUTHORIZATION_API_KEY);
     const id = req.params.id;
+    await adminServices.changeStatus(api_key, id);
   } catch (error) {
     next(error);
   }

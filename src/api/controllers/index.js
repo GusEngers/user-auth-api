@@ -1,7 +1,7 @@
 // IMPORTAR CONTROLADORES
 const { login, auth, signUp } = require('./auth.controllers');
 const { getUsers, getUser, patchUser, deleteUser } = require('./users.controllers');
-const { getRegister } = require('./admin.controllers');
+const { getRegister, changeStatus } = require('./admin.controllers');
 
 // IMPORTAR MIDDLEWARES
 const { errorHandler } = require('../middlewares/error');
@@ -30,5 +30,6 @@ module.exports = {
   patchUserController: [checkUserIdParam, checkSameUser, checkUserBody, patchUser, errorHandler],
   deleteUserController: [checkUserIdParam, checkSameUser, deleteUser, errorHandler],
   getRegisterController: [checkAdmin, checkAdminTypeParam, checkAdminUsersQuery, getRegister, errorHandler],
+  changeStatusController: [checkAdmin, checkUserIdParam, changeStatus, errorHandler],
   methodNotAllowed,
 };
