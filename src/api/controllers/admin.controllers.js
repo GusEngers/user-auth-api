@@ -30,9 +30,27 @@ async function changeStatus(req, res, next) {
     const api_key = req.header(X_AUTHORIZATION_API_KEY);
     const id = req.params.id;
     await adminServices.changeStatus(api_key, id);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
 }
 
-module.exports = { getRegister, changeStatus };
+/**
+ * @description Controlador para cambiar la propiedad admin de un usuario
+ * @param {import("express").Request} req Request
+ * @param {import("express").Response} res Response
+ * @param {import("express").NextFunction} next NextFunction
+ */
+async function changeAdmin(req, res, next) {
+  try {
+    const api_key = req.header(X_AUTHORIZATION_API_KEY);
+    const id = req.params.id;
+    await adminServices.changeAdmin(api_key, id);
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { getRegister, changeStatus, changeAdmin };

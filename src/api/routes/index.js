@@ -10,6 +10,8 @@ const {
   patchUserController,
   deleteUserController,
   getRegisterController,
+  changeStatusController,
+  changeAdminController,
   methodNotAllowed,
 } = require('../controllers');
 
@@ -39,5 +41,7 @@ api.route('/users/:id').get(getUserController).patch(patchUserController).delete
  * @description Rutas para el manejo de Usuarios a través de admin
  */
 api.route('/admin/users/:type').get(getRegisterController).all(methodNotAllowed);
+api.route('/admin/:id/status').patch(changeStatusController).all(methodNotAllowed);
+api.route('/admin/:id/admin').patch(changeAdminController).all(methodNotAllowed);
 
 module.exports = api;

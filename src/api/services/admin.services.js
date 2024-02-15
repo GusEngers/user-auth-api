@@ -64,4 +64,21 @@ async function changeStatus(api_key, _id) {
   }
 }
 
-module.exports = { getRegister, changeStatus };
+/**
+ * @description Cambia la propiedad admin de un usuario
+ * @param {string} api_key API-KEY del cliente
+ * @param {string} _id ID del usuario
+ */
+async function changeAdmin(api_key, _id) {
+  const user = await User.findOne({ api_key, _id });
+  if (!user) throw new ResponseError('User not found', 404);
+  if (user.admin) {
+    user.admin = false;
+    await user.save();
+  } else {
+    user.admin = true;
+    await user.save();
+  }
+}
+
+module.exports = { getRegister, changeStatus, changeAdmin };
