@@ -72,13 +72,8 @@ async function changeStatus(api_key, _id) {
 async function changeAdmin(api_key, _id) {
   const user = await User.findOne({ api_key, _id });
   if (!user) throw new ResponseError('User not found', 404);
-  if (user.admin) {
-    user.admin = false;
-    await user.save();
-  } else {
-    user.admin = true;
-    await user.save();
-  }
+  user.admin = !user.admin;
+  await user.save();
 }
 
 module.exports = { getRegister, changeStatus, changeAdmin };

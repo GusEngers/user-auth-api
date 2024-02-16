@@ -6,7 +6,7 @@ const { postApiKey } = require('./api_key.controllers');
 
 // IMPORTAR MIDDLEWARES
 const { errorHandler } = require('../middlewares/error');
-const { checkAuthBody, checkUserBody } = require('../middlewares/check_body');
+const { checkAuthBody, checkUserBody, checkApiKeyBody } = require('../middlewares/check_body');
 const { checkUsersQuery, checkAdminUsersQuery } = require('../middlewares/check_query');
 const { checkUserIdParam, checkAdminTypeParam } = require('../middlewares/check_params');
 const { checkSameUser, checkAdmin } = require('../middlewares/check_token');
@@ -33,6 +33,6 @@ module.exports = {
   getRegisterController: [checkAdmin, checkAdminTypeParam, checkAdminUsersQuery, getRegister, errorHandler],
   changeStatusController: [checkAdmin, checkUserIdParam, changeStatus, errorHandler],
   changeAdminController: [checkAdmin, checkUserIdParam, changeAdmin, errorHandler],
-  postApiKeyController: [postApiKey, errorHandler],
+  postApiKeyController: [checkApiKeyBody, postApiKey, errorHandler],
   methodNotAllowed,
 };
