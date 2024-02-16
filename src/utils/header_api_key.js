@@ -10,6 +10,7 @@ const { ResponseError } = require('./error.class');
  * @param {import("express").NextFunction} next NextFunction
  */
 async function handleApiKey(req, res, next) {
+  if (req.originalUrl.includes('/v3/api_key')) return next();
   const header = req.header(X_AUTHORIZATION_API_KEY);
   // Verificar requerimiento y formato
   if (!header) return next(new ResponseError(`'${X_AUTHORIZATION_API_KEY}' header required`, 401));

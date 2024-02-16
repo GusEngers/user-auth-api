@@ -12,13 +12,14 @@ const {
   getRegisterController,
   changeStatusController,
   changeAdminController,
+  postApiKeyController,
   methodNotAllowed,
 } = require('../controllers');
 
 /**
  * @description Rutas para el manejo de API-KEY
  */
-api.route('/api_key').all(methodNotAllowed);
+api.route('/api_key').post(postApiKeyController).all(methodNotAllowed);
 
 /**
  * @description Rutas para la autenticación de Usuarios

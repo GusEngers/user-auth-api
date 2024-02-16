@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const { STATUS_ACTIVE, STATUS_INACTIVE } = require('../utils/constants');
+const { STATUS_ACTIVE, STATUS_INACTIVE } = require('../../utils/constants');
 
 /**
  * @description Modelo para administrar Usuarios
