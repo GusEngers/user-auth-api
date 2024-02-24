@@ -48,7 +48,7 @@ async function signUp(req, res, next) {
     const { email, password } = req.body;
     const api_key = req.header(X_AUTHORIZATION_API_KEY);
     const data = await authServices.signUp(email, password, api_key);
-    res.location(`/v3/api/users/${data._id}`).status(201).json(data);
+    res.location(`/v3/users/${data._id}`).status(201).json(data);
   } catch (error) {
     next(error);
   }

@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/client/views');
 app.use(require('morgan')('dev'));
 
-// app.use('/', client);
+app.use('/', client);
 app.use('/v3', handleCors, handleApiKey, api);
 
 app.use(handleGlobalError);
