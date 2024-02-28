@@ -13,7 +13,7 @@ async function postApiKey(req, res, next) {
     const api_key = await apiKeyServices.postApiKey(email, project, password);
     if (sendEmail === 'true') {
       await apiKeyServices.sendEmailApiKey(api_key.api_key, email, password);
-      return res.redirect('/?new=true');
+      return res.redirect('/?newApi=true');
     }
     res.status(201).json(api_key);
   } catch (error) {
