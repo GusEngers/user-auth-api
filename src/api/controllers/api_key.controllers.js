@@ -17,6 +17,9 @@ async function postApiKey(req, res, next) {
     }
     res.status(201).json(api_key);
   } catch (error) {
+    if (sendEmail === 'true') {
+      return res.redirect('/?error=true');
+    }
     next(error);
   }
 }
