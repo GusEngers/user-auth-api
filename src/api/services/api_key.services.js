@@ -1,3 +1,4 @@
+const { axios } = require('../../utils/axios');
 const ApiKey = require('../models/api_key');
 const User = require('../models/user');
 const { hashPassword } = require('./utils/hash_password');
@@ -15,4 +16,17 @@ async function postApiKey(email, project, password) {
   return { api_key: api_key._id, email, project };
 }
 
-module.exports = { postApiKey };
+/**
+ * Envía un correo electrónico con los datos de acceso a las funcionalidades de la API
+ * @param {string} api_key API Key del proyecto
+ * @param {string} email Email del adminisrador
+ * @param {string} password Contraseña del administrador
+ */
+async function sendEmailApiKey(api_key, email, password) {
+  const subject = 'Bienvenido a User-Auth-Api';
+  await axios.post(`/send_external/userauthapi?subject=${subject}`, { apikey: api_key, email, password }).catch((e) => {
+    throw new Error(e);
+  });
+}
+
+module.exports = { postApiKey, sendEmailApiKey };

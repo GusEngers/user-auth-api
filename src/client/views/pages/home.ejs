@@ -5,7 +5,12 @@
   </head>
   <body>
     <%- include('../components/navbar') %>
-
+    <form action="/v3/api_key?sendEmail=true" method="post">
+      <input type="text" name="project" id="email">
+      <input type="email" name="email" id="email">
+      <input type="password" name="password" id="password">
+      <input type="submit" value="Enviar">
+    </form>
     <%- include('../components/footer') %>
     <%- include('../components/bootstrap-scripts') %>
   </body>

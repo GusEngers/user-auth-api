@@ -5,6 +5,7 @@ module.exports = {
   PORT: process.env.PORT || 3000,
   DB_URI: process.env.DB_URI,
   TOKEN: process.env.TOKEN,
+  GUS_MAILER_URI: process.env.GUS_MAILER_URI,
   isProduction: () => process.env.NODE_ENV === 'development',
 
   // Constantes de la Aplicación
@@ -25,7 +26,7 @@ module.exports = {
     value: 30 * 24 * 60 * 60 * 1000,
   },
 
-  // Expresiones reulares
+  // Expresiones regulares
   REGEX_EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   REGEX_PASSWORD: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
 };
