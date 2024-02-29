@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <%- include('../components/head', { title: 'Inicio | User-Auth-API' }) %>
+  </head>
+  <body class="bg-dark">
+    <%- include('../components/navbar') %>
+      
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-7">
+          <h1 class="fs-1 fw-bold text-primary">USER-AUTH-API</h1>
+          <p class="fs-3 text-light">
+            Con nuestra API web podrás crear, modificar, eliminar y administar tus usuarios sin demasiadas complicaciones.
+          </p>
+        </div>
+        <div class="col-12 col-md-5">
+          <div class="registration-form">
+            <form action="/v3/api_key?sendEmail=true" method="post">
+
+              <% if (info) { %>
+                <div class="alert alert-success" role="alert">
+                  <%= info %>
+                </div>
+              <% } %>
+
+              <% if (error) { %>
+                <div class="alert alert-danger" role="alert">
+                  <%= error %>
+                </div>
+              <% } %>
+
+              <h3 class="text-primary fw-bold">Genera tu API-KEY</h3>
+              <div class="form-group">
+                <input type="text" class="form-control item" id="project-apikey" name="project" minlength="3" placeholder="Nombre del Proyecto" required />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control item" id="email-apikey" name="email" placeholder="Correo del Administrador" required />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control item" id="password-apikey" name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Debe tener letras y números" minlength="8" placeholder="Contraseña" required />
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-disabled generate-apikey" id="submit-apikey">GENERAR</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="container align-items-center">
+      <h2 class="fs-2 fw-bold text-primary">SOBRE LA API</h1>
+      <p class="fs-3 text-light">
+        Esta API Web está construida en Node.js junto con Express.js. Los datos se almacenan en una base de datos de MongoDB y se utiliza Mongoose para su interacción.
+      </p>
+      <p class="fs-3 text-light">
+        Todos los datos ingresados son debidamente revisados y verificados para que cumplan con su formato correcto. Las contraseñas son debidamente encriptadas al momento de guardarlas.
+      </p>
+      <p class="fs-3 text-light">
+        Para generar los tokens de sesión se utiliza JSON Web Token.
+      </p>
+      <p class="fs-3 text-light">
+        Todo el código de este proyecto se encuentra en su repositorio de <a href="http://github.com/GusEngers/user-auth-api" target="_blank" rel="noopener noreferrer">GitHub</a>. ¡No dudes en echar una mirada!
+      </p>
+      <p class="fs-3 text-light">
+        Más información relevante se encuentra en la documentación. ¡Gracias por llegar hasta aquí!
+      </p>
+    </section>
+
+    <section id="contact" class="container align-items-center">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-7">
+          <h2 class="fs-2 fw-bold text-primary">CONTÁCTAME</h2>
+          <p class="fs-3 text-light">
+            Puedes dejarme un mensaje, inquietud, una pregunta o ¡incluso un insulto!, lo estaré leyendo y lo responderé a la mayor brevedad posible.
+          </p>
+          <p class="fs-3 text-light">
+            También puedes enviarme un Whatsapp en el siguiente número:
+          </p>
+          <p class="fs-3 text-success">
+            +54 9 3754-499497
+          </p>
+        </div>
+        <div class="col-12 col-md-5">
+          <div class="registration-form">
+            <form action="/" method="post">
+              <div class="form-group">
+                <input type="text" class="form-control item" id="name-contact" name="nombre" minlength="3" placeholder="Tu nombre" required />
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control item" id="email-contact" name="email" placeholder="Tu correo" required />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control item" id="message-contact" name="mensaje" minlength="1" placeholder="Tu mensaje" required />
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-disabled generate-apikey" id="submit-contact">ENVIAR</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include('../components/footer') %> <%- include('../components/bootstrap-scripts') %>
+  </body>
+</html>

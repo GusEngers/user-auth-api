@@ -1,59 +1,32 @@
+require('dotenv').config();
+
 module.exports = {
-  METHODS: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  HEADER_TOKEN: 'X-Authorization-Token',
-  HEADER_API_KEY: 'X-Authorization-Api-Key',
+  // Configuración de la Aplicación
+  PORT: process.env.PORT || 3000,
+  DB_URI: process.env.DB_URI,
+  TOKEN: process.env.TOKEN,
+  GUS_MAILER_URI: process.env.GUS_MAILER_URI,
+  isProduction: () => process.env.NODE_ENV === 'development',
+
+  // Constantes de la Aplicación
+  X_AUTHORIZATION_TOKEN: 'x-authorization-token',
+  X_AUTHORIZATION_API_KEY: 'x-authorization-api-key',
   STATUS_ACTIVE: 'active',
   STATUS_INACTIVE: 'inactive',
-  get LINKS_API() {
-    return [
-      {
-        path: '/api/auth',
-        headers: { POST: [this.HEADER_API_KEY, this.HEADER_TOKEN] },
-        methods: [this.METHODS[1]],
-      },
-      {
-        path: '/api/auth/register',
-        headers: { POST: [this.HEADER_API_KEY] },
-        methods: [this.METHODS[1]],
-      },
-      {
-        path: '/api/auth/login',
-        headers: { POST: [this.HEADER_API_KEY] },
-        methods: [this.METHODS[1]],
-      },
-      {
-        path: '/api/user/:id',
-        headers: {
-          GET: [this.HEADER_API_KEY],
-          DELETE: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[0], this.METHODS[3]],
-      },
-      {
-        path: '/api/user/:id/change/data',
-        headers: {
-          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[2]],
-      },
-      {
-        path: '/api/user/:id/change/email',
-        headers: {
-          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[2]],
-      },
-      {
-        path: '/api/user/:id/change/password',
-        headers: {
-          PUT: [this.HEADER_API_KEY, this.HEADER_TOKEN],
-        },
-        params: ['id'],
-        methods: [this.METHODS[2]],
-      },
-    ];
+  DAY: {
+    name: 'day',
+    value: 24 * 60 * 60 * 1000,
   },
+  WEEK: {
+    name: 'week',
+    value: 7 * 24 * 60 * 60 * 1000,
+  },
+  MONTH: {
+    name: 'month',
+    value: 30 * 24 * 60 * 60 * 1000,
+  },
+
+  // Expresiones regulares
+  REGEX_EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  REGEX_PASSWORD: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
 };

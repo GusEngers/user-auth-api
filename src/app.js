@@ -1,46 +1,31 @@
 const express = require('express');
 const path = require('path');
-const handleCors = require('./utils/handleCors');
-const handleError = require('./utils/handleError');
-const handleNotFound = require('./utils/handleNotFound');
-const handleHeaderApiKey = require('./utils/handleHeaderApiKey');
-const client = require('./routes/client');
-const api = require('./routes/api');
-const ApiKey = require('./models/api-key');
-const User = require('./models/user');
 
-require('dotenv').config();
+// MIDDLEWARES
+const { handleCors } = require('./utils/cors');
+const { handleGlobalError } = require('./utils/error');
+const { handleNotFound } = require('./utils/not_found');
+const { handleApiKey } = require('./utils/header_api_key');
+
+// RUTAS
+const client = require('./client/routes');
+const api = require('./api/routes');
 
 const app = express();
 
+// CONFIGURACIÓN DE LA APLICACIÓN
 app.disable('x-powered-by');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'client', 'public')));
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-
-if (process.env.NODE_ENV === 'dev') {
-  console.log('[INFO] Dev mode enabled');
-  app.use(require('morgan')('dev'));
-
-  app.get('/todos', async (req, res) => {
-    const api_keys = await ApiKey.find({});
-    const users = await User.find({});
-    res.json({ api_keys, users });
-  });
-  
-  app.get('/borrar', async (req, res) => {
-    await ApiKey.deleteMany({});
-    await User.deleteMany({});
-    res.json('Todo eliminado');
-  });
-}
+app.set('views', __dirname + '/client/views');
+app.use(require('morgan')('dev'));
 
 app.use('/', client);
-app.use('/api', handleCors, handleHeaderApiKey, api);
+app.use('/v3', handleCors, handleApiKey, api);
 
-app.use(handleError);
+app.use(handleGlobalError);
 app.use(handleNotFound);
 
 module.exports = app;
