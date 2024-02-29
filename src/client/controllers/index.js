@@ -39,7 +39,7 @@ async function contactMessage(req, res, next) {
     await axios.post(`/send/contacto?subject=${subject}`, req.body).catch((e) => {
       throw new Error(e);
     });
-    res.render('pages/home');
+    res.render('pages/home', { info: null, error: null });
   } catch (error) {
     res.render('pages/error', { error: error.message });
   }
