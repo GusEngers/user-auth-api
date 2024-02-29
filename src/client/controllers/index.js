@@ -7,15 +7,12 @@ const { axios } = require('../../utils/axios');
  * @param {import("express").NextFunction} next NextFunction
  */
 function homePage(req, res, next) {
-  const { newApi, contact, error } = req.query;
+  const { newApi, error } = req.query;
   if (error === 'true') {
     return res.render('pages/home', { info: null, error: 'Error al generar la API-KEY' });
   }
   if (newApi === 'true') {
     return res.render('pages/home', { info: '¡API Key generada! Revisa tu correo', error: null });
-  }
-  if (contact === 'true') {
-    return res.render('pages/home', { info: '¡Correo enviado! Muchas gracias', error: null });
   }
   res.render('pages/home', { info: null, error: null });
 }

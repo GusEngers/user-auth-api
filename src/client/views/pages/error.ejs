@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <%- include('../components/head', { title: 'Error | User-Auth-API' }) %>
+  </head>
+  <body class="bg-dark">
+    <%- include('../components/navbar') %>
+
+    <div class="text-center pt-5" style="height: 75vh;">
+      <div class="container">
+        <h1 class="display-1 pt-5 font-weight-bold text-primary">400</h1>
+        <h1 class="display-4 pt-1 pb-3 text-light">¡Ups! Ocurrió un error</h1>
+        <h3 class="font-weight-light text-light"><%= error %></h3>
+        <a href="/" class="btn btn-primary mt-3 pt-3 pb-3 pr-4 pl-4">Volver a Inicio</a>
+      </div>
+    </div>
+
+    <%- include('../components/footer') %> <%- include('../components/bootstrap-scripts') %>
+  </body>
+</html>
