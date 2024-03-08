@@ -12,7 +12,7 @@ function homePage(req, res, next) {
     return res.render('pages/home', { info: null, error: 'Error al generar la API-KEY' });
   }
   if (newApi === 'true') {
-    return res.render('pages/home', { info: '¡API Key generada! Revisa tu correo', error: null });
+    return res.render('pages/home', { info: '¡API Key generada! Revisa tu correo o bandeja de spam', error: null });
   }
   res.render('pages/home', { info: null, error: null });
 }
@@ -36,7 +36,7 @@ function docsPage(req, res, next) {
 async function contactMessage(req, res, next) {
   try {
     const subject = 'Contacto desde User-Auth-Api';
-    await axios.post(`/send/contacto?subject=${subject}`, req.body).catch((e) => {
+    await axios.post(`/template/3yxj6lj17e5ldo2r?subject=${subject}&name=${req.body.name}&email=${req.body.email}`, req.body).catch((e) => {
       throw new Error(e);
     });
     res.render('pages/home', { info: null, error: null });
