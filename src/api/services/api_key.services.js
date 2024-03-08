@@ -24,9 +24,11 @@ async function postApiKey(email, project, password) {
  */
 async function sendEmailApiKey(api_key, email, password) {
   const subject = 'Bienvenido a User-Auth-Api';
-  await axios.post(`/send_external/userauthapi?subject=${subject}`, { apikey: api_key, email, password }).catch((e) => {
-    throw new Error(e);
-  });
+  await axios
+    .post(`/message/65eb1b848651ea155270faab?subject=${subject}&email=${email}&name=UserAuthApi`, { apikey: api_key, email, password })
+    .catch((e) => {
+      throw new Error(e);
+    });
 }
 
 module.exports = { postApiKey, sendEmailApiKey };
